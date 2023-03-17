@@ -1,0 +1,36 @@
+.book {
+  background-color: var(--color-blue-darken);
+  color: var(--color-blue-lighten);
+  max-height: 20rem;
+  min-width: 15rem;
+  flex-basis: 15rem;
+  border-radius: 1rem;
+  padding: 0.8rem;
+
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    background-image: url(../../assets/imgs/city.jpg);
+    // background-clip: border-box;
+
+    width: 100%;
+    flex-basis: 40%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0.4rem;
+  }
+
+  &__title {
+    margin: 1em 0;
+  }
+
+  &__author {
+  }
+
+  &__pages {
+  }
+
+  &__read {
+  }
+}

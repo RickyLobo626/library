@@ -1,0 +1,13 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-blue-lighten);
+  font-family: "Quicksand", sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
