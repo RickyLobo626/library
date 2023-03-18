@@ -1,4 +1,16 @@
 .main {
-  flex-grow: 1;
+  height: 100%;
   padding: 3rem;
+
+  position: relative;
+
+  &__add {
+    font-size: 1.4rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5rem;
+
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+  }
 }
