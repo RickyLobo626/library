@@ -8,5 +8,8 @@
     "compile:sass-prod": "sass --no-source-map --style=compressed assets/scss:assets/css"
   },
   "author": "RickyLobo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.59.3"
+  }
 }
