@@ -1,0 +1,17 @@
+.field {
+  font: inherit;
+  width: 100%;
+  border: 2px solid var(--color-transparent-black);
+  padding: 0.8em 1em;
+  margin-bottom: 0.8rem;
+  border-radius: var(--round-sm);
+  outline: none;
+
+  &:focus-visible {
+    border: 3px solid var(--color-blue);
+  }
+
+  &::placeholder {
+    opacity: 0.3;
+  }
+}

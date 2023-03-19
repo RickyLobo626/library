@@ -1,4 +1,5 @@
 const btns = document.querySelectorAll("[data-btn]");
+const modal = document.getElementById("modal");
 
 let myLibrary = [];
 
@@ -20,11 +21,15 @@ function addBookToLibrary() {
   // do stuff here
 }
 
-console.log(btns);
-
 btns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
-    if (btn.dataset.btn == "add-btn") {
+    switch (btn.dataset.btn) {
+      case "add-book":
+        modal.showModal();
+        break;
+      case "close-modal":
+        modal.close();
+        break;
     }
   });
 });

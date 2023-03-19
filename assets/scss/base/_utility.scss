@@ -1,0 +1,27 @@
+.color-white {
+  color: #fff;
+}
+
+.color-blue {
+  color: var(--color-blue);
+}
+
+.color-blue-lighten {
+  color: var(--color-blue-lighten);
+}
+
+.bg-blue {
+  background: var(--color-blue);
+}
+
+.bg-blue-lighten {
+  background: var(--color-blue-lighten);
+}
+
+.bg-white {
+  background: #fff;
+}
+
+.bg-none {
+  background: none;
+}

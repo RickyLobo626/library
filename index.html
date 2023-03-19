@@ -17,7 +17,9 @@
   <body>
     <header class="header">
       <h1 class="title">Library</h1>
-      <button class="login text-btn text-btn--outlined">Login</button>
+      <button class="login text-btn text-btn--outlined color-blue">
+        Login
+      </button>
     </header>
     <main class="main">
       <div class="grid">
@@ -55,22 +57,52 @@
         </div>
       </div>
 
-      <button class="main__add icon-btn icon-btn--elevated" data-btn="add-book">
+      <button
+        class="main__add icon-btn icon-btn--elevated color-blue"
+        data-btn="add-book"
+      >
         &plus;
       </button>
-      <dialog open class="modal" id="modal">
+      <dialog class="modal" id="modal">
         <header class="modal__header">
           <p class="modal__title">Add a book</p>
-          <button class="modal__close icon-btn icon-btn--small">&times;</button>
+          <button
+            class="modal__close icon-btn icon-btn--small"
+            data-btn="close-modal"
+          >
+            &times;
+          </button>
         </header>
 
-        <form class="modal__form">
-          <input type="text" class="text-input" />
-          <input type="text" class="text-input" />
-          <input type="text" class="text-input" />
-          <input type="text" class="text-input" />
-          <input type="text" class="text-input" />
+        <form id="add" class="modal__form">
+          <fieldset>
+            <label for="title">Title</label>
+            <input
+              id="title"
+              type="text"
+              class="field"
+              placeholder="The Hobbit"
+            />
+            <label for="author">Author</label>
+            <input
+              id="author"
+              type="text"
+              class="field"
+              placeholder="J. R. R. Tolkien"
+            />
+            <label for="pages">Number of pages</label>
+            <input id="pages" type="text" class="field" placeholder="310" />
+            <label>
+              <input type="checkbox" placeholder="310" id="read" />
+              I have read this book
+            </label>
+          </fieldset>
         </form>
+        <div class="modal__actions">
+          <button form="add" class="text-btn text-btn bg-blue color-white">
+            Add
+          </button>
+        </div>
       </dialog>
     </main>
   </body>

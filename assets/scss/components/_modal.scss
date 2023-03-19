@@ -1,6 +1,6 @@
 .modal {
   min-width: 300px;
-  max-width: 500px;
+  max-width: 400px;
   border: none;
   border-radius: 1rem;
   padding: 0;
@@ -27,6 +27,26 @@
   }
 
   &__form {
-    padding: 1.2rem;
+    fieldset {
+      padding: 1.6rem 1.2rem;
+
+      label {
+        display: block;
+        padding: 0.4rem 0.2rem;
+      }
+
+      input[type="checkbox"] {
+        margin-left: auto;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    padding: 1rem 1.2rem;
+
+    .text-btn {
+      width: 100%;
+    }
   }
 }

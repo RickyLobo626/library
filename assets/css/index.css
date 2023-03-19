@@ -139,13 +139,42 @@ table {
   border-spacing: 0;
 }
 
+.color-white {
+  color: #fff;
+}
+
+.color-blue {
+  color: var(--color-blue);
+}
+
+.color-blue-lighten {
+  color: var(--color-blue-lighten);
+}
+
+.bg-blue {
+  background: var(--color-blue);
+}
+
+.bg-blue-lighten {
+  background: var(--color-blue-lighten);
+}
+
+.bg-white {
+  background: #fff;
+}
+
+.bg-none {
+  background: none;
+}
+
 html {
   --color-blue-lighten: #bfdbfe;
   --color-blue: #93c5fd;
   --color-blue-darken: #577de7;
-  --elevation-sm: 0 2px 5px rgba(0, 0, 0, 0.3);
-  --elevation-md: 0 5px 15px rgba(0, 0, 0, 0.3);
-  --elevation-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
+  --color-transparent-black: rgba(0, 0, 0, 0.2);
+  --elevation-sm: 0 2px 5px rgba(0, 0, 0, 0.4);
+  --elevation-md: 0 5px 15px rgba(0, 0, 0, 0.4);
+  --elevation-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
   --round-sm: 0.4rem;
   --round-md: 0.8rem;
   --round-lg: 0.8rem;
@@ -165,8 +194,6 @@ body {
 }
 
 .text-btn {
-  color: var(--color-blue);
-  background: #fff;
   font: inherit;
   font-weight: bold;
   text-transform: uppercase;
@@ -176,22 +203,30 @@ body {
   border-radius: 0.4em;
 }
 .text-btn--outlined {
+  background: none;
   border: 3px solid var(--color-blue);
 }
 .text-btn:focus-visible {
   outline: 3px solid rgba(0, 0, 0, 0.25);
 }
 
-.text-input {
+.field {
+  font: inherit;
   width: 100%;
-  margin-bottom: 1rem;
+  border: 2px solid var(--color-transparent-black);
+  padding: 0.8em 1em;
+  margin-bottom: 0.8rem;
+  border-radius: var(--round-sm);
+  outline: none;
 }
-.text-input:last-child {
-  margin-bottom: 0;
+.field:focus-visible {
+  border: 3px solid var(--color-blue);
+}
+.field::placeholder {
+  opacity: 0.3;
 }
 
 .icon-btn {
-  color: var(--color-blue);
   background: #fff;
   font: inherit;
   font-size: 2.4rem;
@@ -271,7 +306,7 @@ body {
 
 .modal {
   min-width: 300px;
-  max-width: 500px;
+  max-width: 400px;
   border: none;
   border-radius: 1rem;
   padding: 0;
@@ -293,8 +328,22 @@ body {
 .modal__close {
   margin: -5px -5px 0 auto;
 }
-.modal__form {
-  padding: 1.2rem;
+.modal__form fieldset {
+  padding: 1.6rem 1.2rem;
+}
+.modal__form fieldset label {
+  display: block;
+  padding: 0.4rem 0.2rem;
+}
+.modal__form fieldset input[type=checkbox] {
+  margin-left: auto;
+}
+.modal__actions {
+  display: flex;
+  padding: 1rem 1.2rem;
+}
+.modal__actions .text-btn {
+  width: 100%;
 }
 
 .header {
