@@ -1,4 +1,5 @@
-const addBook = document.getElementById("AddBook");
+const btns = document.querySelectorAll("[data-btn]");
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -19,4 +20,11 @@ function addBookToLibrary() {
   // do stuff here
 }
 
-addBook.addEventListener("click", (e) => {});
+console.log(btns);
+
+btns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    if (btn.dataset.btn == "add-btn") {
+    }
+  });
+});

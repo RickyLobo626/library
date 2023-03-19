@@ -1,0 +1,32 @@
+.modal {
+  min-width: 300px;
+  max-width: 500px;
+  border: none;
+  border-radius: 1rem;
+  padding: 0;
+  box-shadow: var(--elevation-lg);
+
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+  }
+
+  &__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  &__close {
+    margin: -5px -5px 0 auto;
+  }
+
+  &__form {
+    padding: 1.2rem;
+  }
+}

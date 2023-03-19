@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
     <link rel="stylesheet" href="assets/css/index.css" />
-    <script src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <header class="header">
@@ -22,34 +22,56 @@
     <main class="main">
       <div class="grid">
         <div class="book">
-          <p class="book__title">The Book</p>
-          <p class="book__author">Ricardo Lobo</p>
-          <div class="book__details">
-            <p class="book__read">Completed</p>
-            <p class="book__pages">Pages: 626</p>
+          <div class="book__cover">
+            <p class="book__title">The Book</p>
+            <p class="book__author">Ricardo Lobo</p>
+            <div class="book__details">
+              <p class="book__pages">400 pages</p>
+              <p class="book__read">Not read yet</p>
+            </div>
           </div>
         </div>
 
         <div class="book">
-          <p class="book__title">The Book</p>
-          <p class="book__author">Ricardo Lobo</p>
-          <div class="book__details">
-            <p class="book__read">Completed</p>
-            <p class="book__pages">Pages: 626</p>
+          <div class="book__cover">
+            <p class="book__title">The Book</p>
+            <p class="book__author">Ricardo Lobo</p>
+            <div class="book__details">
+              <p class="book__pages">400 pages</p>
+              <p class="book__read">Not read yet</p>
+            </div>
           </div>
         </div>
 
         <div class="book">
-          <p class="book__title">The Book</p>
-          <p class="book__author">Ricardo Lobo</p>
-          <div class="book__details">
-            <p class="book__read">Completed</p>
-            <p class="book__pages">Pages: 626</p>
+          <div class="book__cover">
+            <p class="book__title">The Book</p>
+            <p class="book__author">Ricardo Lobo</p>
+            <div class="book__details">
+              <p class="book__pages">400 pages</p>
+              <p class="book__read">Not read yet</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <button id="AddBook" class="main__add icon-btn">+</button>
+      <button class="main__add icon-btn icon-btn--elevated" data-btn="add-book">
+        &plus;
+      </button>
+      <dialog open class="modal" id="modal">
+        <header class="modal__header">
+          <p class="modal__title">Add a book</p>
+          <button class="modal__close icon-btn icon-btn--small">&times;</button>
+        </header>
+
+        <form class="modal__form">
+          <input type="text" class="text-input" />
+          <input type="text" class="text-input" />
+          <input type="text" class="text-input" />
+          <input type="text" class="text-input" />
+          <input type="text" class="text-input" />
+        </form>
+      </dialog>
     </main>
   </body>
 </html>
