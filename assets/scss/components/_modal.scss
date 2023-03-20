@@ -1,5 +1,6 @@
 .modal {
   min-width: 300px;
+  width: 100%;
   max-width: 400px;
   border: none;
   border-radius: 1rem;
@@ -13,7 +14,7 @@
   &__header {
     display: flex;
     align-items: center;
-    padding: 0.8rem 1.2rem;
+    padding: 1rem 1.2rem;
   }
 
   &__title {
@@ -47,6 +48,7 @@
 
     .text-btn {
       width: 100%;
+      padding: 1rem;
     }
   }
 }

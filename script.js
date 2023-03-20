@@ -1,7 +1,14 @@
 const btns = document.querySelectorAll("[data-btn]");
+const inputs = document.querySelectorAll("[data-input]");
 const modal = document.getElementById("modal");
 
 let myLibrary = [];
+let form = {
+  title: "",
+  author: "",
+  pages: null,
+  read: false,
+};
 
 function Book(title, author, pages, read) {
   // the constructor...
@@ -32,4 +39,17 @@ btns.forEach((btn) => {
         break;
     }
   });
+});
+
+inputs.forEach((input) => {
+  if (input.dataset.input == "read") {
+    input.addEventListener("click", (e) => {
+      form[input.name] = input.checked;
+      console.log(form);
+    });
+  } else {
+    input.addEventListener("keyup", (e) => {
+      form[input.name] = +input.value;
+    });
+  }
 });

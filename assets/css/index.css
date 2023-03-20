@@ -215,7 +215,7 @@ body {
   width: 100%;
   border: 2px solid var(--color-transparent-black);
   padding: 0.8em 1em;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
   border-radius: var(--round-sm);
   outline: none;
 }
@@ -306,6 +306,7 @@ body {
 
 .modal {
   min-width: 300px;
+  width: 100%;
   max-width: 400px;
   border: none;
   border-radius: 1rem;
@@ -318,7 +319,7 @@ body {
 .modal__header {
   display: flex;
   align-items: center;
-  padding: 0.8rem 1.2rem;
+  padding: 1rem 1.2rem;
 }
 .modal__title {
   font-size: 1.4rem;
@@ -344,6 +345,7 @@ body {
 }
 .modal__actions .text-btn {
   width: 100%;
+  padding: 1rem;
 }
 
 .header {

@@ -79,22 +79,40 @@
             <label for="title">Title</label>
             <input
               id="title"
+              name="title"
               type="text"
               class="field"
+              data-input="title"
               placeholder="The Hobbit"
             />
             <label for="author">Author</label>
             <input
               id="author"
+              name="author"
               type="text"
               class="field"
               placeholder="J. R. R. Tolkien"
+              data-input="author"
             />
             <label for="pages">Number of pages</label>
-            <input id="pages" type="text" class="field" placeholder="310" />
+            <input
+              id="pages"
+              name="pages"
+              type="text"
+              class="field"
+              placeholder="310"
+              data-input="pages"
+            />
             <label>
-              <input type="checkbox" placeholder="310" id="read" />
-              I have read this book
+              <input
+                type="checkbox"
+                id="read"
+                name="read"
+                data-input="read"
+                value="read"
+                placeholder="310"
+              />
+              I finished this book
             </label>
           </fieldset>
         </form>
