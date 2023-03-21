@@ -22,59 +22,26 @@
       </button>
     </header>
     <main class="main">
-      <div class="grid">
-        <div class="book">
-          <div class="book__cover">
-            <p class="book__title">The Book</p>
-            <p class="book__author">Ricardo Lobo</p>
-            <div class="book__details">
-              <p class="book__pages">400 pages</p>
-              <p class="book__read">Not read yet</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="book">
-          <div class="book__cover">
-            <p class="book__title">The Book</p>
-            <p class="book__author">Ricardo Lobo</p>
-            <div class="book__details">
-              <p class="book__pages">400 pages</p>
-              <p class="book__read">Not read yet</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="book">
-          <div class="book__cover">
-            <p class="book__title">The Book</p>
-            <p class="book__author">Ricardo Lobo</p>
-            <div class="book__details">
-              <p class="book__pages">400 pages</p>
-              <p class="book__read">Not read yet</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ul id="BookList" class="grid"></ul>
 
       <button
         class="main__add icon-btn icon-btn--elevated color-blue"
-        data-btn="add-book"
+        data-btn="open-add-modal"
       >
         &plus;
       </button>
-      <dialog class="modal" id="modal">
+      <dialog class="modal" id="Modal">
         <header class="modal__header">
           <p class="modal__title">Add a book</p>
           <button
             class="modal__close icon-btn icon-btn--small"
-            data-btn="close-modal"
+            data-btn="close-add-modal"
           >
             &times;
           </button>
         </header>
 
-        <form id="add" class="modal__form">
+        <form id="add" class="modal__form" action="">
           <fieldset>
             <label for="title">Title</label>
             <input
@@ -98,7 +65,7 @@
             <input
               id="pages"
               name="pages"
-              type="text"
+              type="number"
               class="field"
               placeholder="310"
               data-input="pages"
@@ -117,7 +84,11 @@
           </fieldset>
         </form>
         <div class="modal__actions">
-          <button form="add" class="text-btn text-btn bg-blue color-white">
+          <button
+            form="add"
+            data-btn="add-book"
+            class="text-btn text-btn bg-blue color-white"
+          >
             Add
           </button>
         </div>

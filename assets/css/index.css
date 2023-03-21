@@ -262,11 +262,11 @@ body {
   padding: 0.6rem;
   flex-basis: 15rem;
   max-height: 20rem;
-  height: 20rem;
   min-width: 15rem;
+  height: 20rem;
   border-style: outset;
   border-top-width: 8px;
-  border-right-width: 12px;
+  border-right-width: 8px;
   border-bottom: none;
   border-left: none;
   border-radius: var(--round-sm);
@@ -275,7 +275,7 @@ body {
 }
 .book__cover {
   height: 100%;
-  border: 5px double #fff;
+  border: 8px double #fff;
   display: flex;
   flex-direction: column;
 }
@@ -383,6 +383,9 @@ body {
   flex-wrap: wrap;
   column-gap: 3rem;
   row-gap: 1rem;
+}
+.grid:empty {
+  display: none;
 }
 
 /*# sourceMappingURL=index.css.map */

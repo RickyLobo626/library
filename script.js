@@ -1,21 +1,24 @@
+"use strict";
+
 const btns = document.querySelectorAll("[data-btn]");
 const inputs = document.querySelectorAll("[data-input]");
-const modal = document.getElementById("modal");
+const addBookModal = document.getElementById("Modal");
+const bookList = document.getElementById("BookList");
 
-let myLibrary = [];
-let form = {
+let library = [];
+
+let addBookForm = {
   title: "",
   author: "",
   pages: null,
   read: false,
 };
 
-function Book(title, author, pages, read) {
-  // the constructor...
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+function Book(book) {
+  this.title = book.title;
+  this.author = book.author;
+  this.pages = book.pages;
+  this.read = book.read;
 }
 
 Book.prototype.getInfo = function () {
@@ -24,18 +27,58 @@ Book.prototype.getInfo = function () {
   return `${this.title} by ${this.author}, ${this.pages}, ${readStr}.`;
 };
 
-function addBookToLibrary() {
-  // do stuff here
-}
+const appendBook = function (books) {
+  bookList.textContent = "";
+  books.forEach((book) => {
+    const bookItem = document.createElement("li");
+    const bookCover = document.createElement("div");
+    const bookTitle = document.createElement("p");
+    const bookAuthor = document.createElement("p");
+    const bookDetails = document.createElement("div");
+    const bookPages = document.createElement("p");
+    const bookRead = document.createElement("p");
+
+    bookTitle.textContent = book.title;
+    bookAuthor.textContent = book.author;
+    bookPages.textContent = book.pages;
+    bookRead.textContent = book.read ? "completed" : "not read yet";
+
+    bookItem.classList.add("book");
+    bookTitle.classList.add("book__title");
+    bookCover.classList.add("book__cover");
+    bookAuthor.classList.add("book__author");
+    bookDetails.classList.add("book__details");
+    bookPages.classList.add("book__pages");
+    bookRead.classList.add("book__read");
+
+    bookDetails.append(bookPages, bookRead);
+    bookCover.append(bookTitle, bookAuthor, bookDetails);
+    bookItem.appendChild(bookCover);
+
+    bookList.appendChild(bookItem);
+  });
+};
+
+const addBookToLibrary = function (form) {
+  const book = new Book(form);
+
+  library.push(book);
+  console.log(library);
+  appendBook(library);
+};
 
 btns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     switch (btn.dataset.btn) {
-      case "add-book":
-        modal.showModal();
+      case "open-add-modal":
+        addBookModal.showModal();
         break;
-      case "close-modal":
-        modal.close();
+      case "close-add-modal":
+        addBookModal.close();
+        break;
+      case "add-book":
+        e.preventDefault();
+        addBookToLibrary(addBookForm);
         break;
     }
   });
@@ -44,12 +87,11 @@ btns.forEach((btn) => {
 inputs.forEach((input) => {
   if (input.dataset.input == "read") {
     input.addEventListener("click", (e) => {
-      form[input.name] = input.checked;
-      console.log(form);
+      addBookForm[input.name] = input.checked;
     });
   } else {
     input.addEventListener("keyup", (e) => {
-      form[input.name] = +input.value;
+      addBookForm[input.name] = input.value;
     });
   }
 });

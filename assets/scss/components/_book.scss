@@ -4,23 +4,22 @@
   padding: 0.6rem;
   flex-basis: 15rem;
   max-height: 20rem;
-  height: 20rem;
   min-width: 15rem;
+  height: 20rem;
   border-style: outset;
   border-top-width: 8px;
-  border-right-width: 12px;
+  border-right-width: 8px;
   border-bottom: none;
   border-left: none;
 
   border-radius: var(--round-sm);
-
   border-bottom-right-radius: var(--round-md);
 
   position: relative;
 
   &__cover {
     height: 100%;
-    border: 5px double #fff;
+    border: 8px double #fff;
 
     display: flex;
     flex-direction: column;

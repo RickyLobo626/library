@@ -6,4 +6,8 @@
   flex-wrap: wrap;
   column-gap: 3rem;
   row-gap: 1rem;
+
+  &:empty {
+    display: none;
+  }
 }
