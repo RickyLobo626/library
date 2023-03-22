@@ -171,6 +171,7 @@ html {
   --color-blue-lighten: #bfdbfe;
   --color-blue: #93c5fd;
   --color-blue-darken: #577de7;
+  --color-error: #ff6565;
   --color-transparent-black: rgba(0, 0, 0, 0.2);
   --elevation-sm: 0 2px 5px rgba(0, 0, 0, 0.4);
   --elevation-md: 0 5px 15px rgba(0, 0, 0, 0.4);
@@ -215,15 +216,17 @@ body {
   width: 100%;
   border: 2px solid var(--color-transparent-black);
   padding: 0.8em 1em;
-  margin-bottom: 1rem;
   border-radius: var(--round-sm);
   outline: none;
 }
-.field:focus-visible {
+.field:focus {
   border: 3px solid var(--color-blue);
 }
 .field::placeholder {
   opacity: 0.3;
+}
+.field--invalid {
+  border-color: var(--color-error);
 }
 
 .icon-btn {
@@ -320,6 +323,7 @@ body {
   display: flex;
   align-items: center;
   padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
 }
 .modal__title {
   font-size: 1.4rem;
@@ -332,15 +336,19 @@ body {
 .modal__form fieldset {
   padding: 1.6rem 1.2rem;
 }
+.modal__form fieldset legend {
+  margin-bottom: 1rem;
+}
 .modal__form fieldset label {
-  display: block;
+  display: inline-block;
   padding: 0.4rem 0.2rem;
 }
-.modal__form fieldset input[type=checkbox] {
-  margin-left: auto;
+.modal__form fieldset .field {
+  margin-bottom: 1.4rem;
 }
 .modal__actions {
   display: flex;
+  margin-top: auto;
   padding: 1rem 1.2rem;
 }
 .modal__actions .text-btn {
@@ -366,7 +374,6 @@ body {
 }
 
 .main {
-  height: 100%;
   padding: 3rem;
   position: relative;
 }

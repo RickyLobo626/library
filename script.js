@@ -1,18 +1,12 @@
 "use strict";
 
-const btns = document.querySelectorAll("[data-btn]");
-const inputs = document.querySelectorAll("[data-input]");
-const addBookModal = document.getElementById("Modal");
-const bookList = document.getElementById("BookList");
+const btnsEl = document.querySelectorAll("[data-btn]");
+const bookFieldsEl = document.querySelectorAll("[data-field]");
+const addBookModalEl = document.getElementById("Modal");
+const bookListEl = document.getElementById("BookList");
+const addBookFormEl = document.getElementById("addBookForm");
 
 let library = [];
-
-let addBookForm = {
-  title: "",
-  author: "",
-  pages: null,
-  read: false,
-};
 
 function Book(book) {
   this.title = book.title;
@@ -23,12 +17,11 @@ function Book(book) {
 
 Book.prototype.getInfo = function () {
   const readStr = this.read ? "completed" : "not read yet";
-
   return `${this.title} by ${this.author}, ${this.pages}, ${readStr}.`;
 };
 
 const appendBook = function (books) {
-  bookList.textContent = "";
+  bookListEl.textContent = "";
   books.forEach((book) => {
     const bookItem = document.createElement("li");
     const bookCover = document.createElement("div");
@@ -55,7 +48,7 @@ const appendBook = function (books) {
     bookCover.append(bookTitle, bookAuthor, bookDetails);
     bookItem.appendChild(bookCover);
 
-    bookList.appendChild(bookItem);
+    bookListEl.appendChild(bookItem);
   });
 };
 
@@ -63,35 +56,80 @@ const addBookToLibrary = function (form) {
   const book = new Book(form);
 
   library.push(book);
-  console.log(library);
   appendBook(library);
 };
 
-btns.forEach((btn) => {
+const validateForm = function (fields) {
+  let isValid = true;
+  fields.forEach((field) => {
+    if (!field.value && field.hasAttribute("required")) {
+      field.classList.add("field--invalid");
+      isValid = false;
+    }
+  });
+
+  return isValid;
+};
+
+const getFieldsObj = function (fields) {
+  const data = {};
+  fields.forEach((field) => {
+    if (field.dataset.field == "read") {
+      data[field.name] = field.checked;
+    } else {
+      data[field.name] = field.value;
+    }
+  });
+
+  return data;
+};
+
+const resetFields = function (fields) {
+  fields.forEach((field) => {
+    if (field.checked) {
+      field.checked = false;
+    } else {
+      field.value = "";
+    }
+  });
+};
+
+const onSubmit = function (e) {
+  const formIsValid = validateForm(bookFieldsEl);
+  if (!formIsValid) return;
+
+  const fieldsData = getFieldsObj(bookFieldsEl);
+
+  addBookToLibrary(fieldsData);
+
+  resetFields(bookFieldsEl);
+  addBookModalEl.close();
+};
+
+const onOpenAddBookModal = function () {
+  addBookModalEl.showModal();
+
+  bookFieldsEl.forEach((field) => {
+    if (field.dataset.field != "read") {
+      field.addEventListener("keyup", (e) => {
+        field.classList.remove("field--invalid");
+      });
+    }
+  });
+};
+
+btnsEl.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     switch (btn.dataset.btn) {
       case "open-add-modal":
-        addBookModal.showModal();
+        onOpenAddBookModal();
         break;
       case "close-add-modal":
-        addBookModal.close();
+        addBookModalEl.close();
         break;
       case "add-book":
-        e.preventDefault();
-        addBookToLibrary(addBookForm);
+        onSubmit(e);
         break;
     }
   });
-});
-
-inputs.forEach((input) => {
-  if (input.dataset.input == "read") {
-    input.addEventListener("click", (e) => {
-      addBookForm[input.name] = input.checked;
-    });
-  } else {
-    input.addEventListener("keyup", (e) => {
-      addBookForm[input.name] = input.value;
-    });
-  }
 });

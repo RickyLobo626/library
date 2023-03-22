@@ -2,6 +2,7 @@
   min-width: 300px;
   width: 100%;
   max-width: 400px;
+
   border: none;
   border-radius: 1rem;
   padding: 0;
@@ -15,11 +16,13 @@
     display: flex;
     align-items: center;
     padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
   }
 
   &__title {
     font-size: 1.4rem;
     font-weight: 700;
+
     letter-spacing: 2px;
   }
 
@@ -31,19 +34,24 @@
     fieldset {
       padding: 1.6rem 1.2rem;
 
+      legend {
+        margin-bottom: 1rem;
+      }
+
       label {
-        display: block;
+        display: inline-block;
         padding: 0.4rem 0.2rem;
       }
 
-      input[type="checkbox"] {
-        margin-left: auto;
+      .field {
+        margin-bottom: 1.4rem;
       }
     }
   }
 
   &__actions {
     display: flex;
+    margin-top: auto;
     padding: 1rem 1.2rem;
 
     .text-btn {

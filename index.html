@@ -41,16 +41,18 @@
           </button>
         </header>
 
-        <form id="add" class="modal__form" action="">
+        <form id="add" class="modal__form" action="#">
           <fieldset>
+            <legend>Which book would you like to add?</legend>
             <label for="title">Title</label>
             <input
               id="title"
               name="title"
               type="text"
               class="field"
-              data-input="title"
+              data-field="title"
               placeholder="The Hobbit"
+              required
             />
             <label for="author">Author</label>
             <input
@@ -59,7 +61,8 @@
               type="text"
               class="field"
               placeholder="J. R. R. Tolkien"
-              data-input="author"
+              data-field="author"
+              required
             />
             <label for="pages">Number of pages</label>
             <input
@@ -68,24 +71,22 @@
               type="number"
               class="field"
               placeholder="310"
-              data-input="pages"
+              data-field="pages"
+              required
             />
-            <label>
-              <input
-                type="checkbox"
-                id="read"
-                name="read"
-                data-input="read"
-                value="read"
-                placeholder="310"
-              />
-              I finished this book
-            </label>
+
+            <input
+              type="checkbox"
+              id="read"
+              name="read"
+              data-field="read"
+              value="read"
+            />
+            <label for="read">I finished this book</label>
           </fieldset>
         </form>
         <div class="modal__actions">
           <button
-            form="add"
             data-btn="add-book"
             class="text-btn text-btn bg-blue color-white"
           >
