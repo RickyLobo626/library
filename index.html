@@ -41,7 +41,7 @@
           </button>
         </header>
 
-        <form id="add" class="modal__form" action="#">
+        <form id="AddBookForm" class="modal__form" action="#">
           <fieldset>
             <legend>Which book would you like to add?</legend>
             <label for="title">Title</label>
@@ -50,9 +50,10 @@
               name="title"
               type="text"
               class="field"
-              data-field="title"
+              maxlength="75"
               placeholder="The Hobbit"
-              required
+              data-book-inputs="title"
+              data-required-field
             />
             <label for="author">Author</label>
             <input
@@ -60,9 +61,10 @@
               name="author"
               type="text"
               class="field"
+              maxlength="50"
               placeholder="J. R. R. Tolkien"
-              data-field="author"
-              required
+              data-book-inputs="author"
+              data-required-field
             />
             <label for="pages">Number of pages</label>
             <input
@@ -71,25 +73,25 @@
               type="number"
               class="field"
               placeholder="310"
-              data-field="pages"
-              required
+              max="99999"
+              data-book-inputs="pages"
+              data-required-field
             />
 
-            <input
-              type="checkbox"
-              id="read"
-              name="read"
-              data-field="read"
-              value="read"
-            />
-            <label for="read">I finished this book</label>
+          
+              <label>  
+              <input
+                type="checkbox"
+                id="read"
+                name="read"
+                value="read"
+                data-book-inputs
+              />I've read this book</label>
+            </div>
           </fieldset>
         </form>
         <div class="modal__actions">
-          <button
-            data-btn="add-book"
-            class="text-btn text-btn bg-blue color-white"
-          >
+          <button type="submit" form="AddBookForm" class="text-btn bg-blue color-white">
             Add
           </button>
         </div>

@@ -6,15 +6,15 @@
   border-radius: var(--round-sm);
   outline: none;
 
+  &--invalid {
+    border-color: var(--color-error);
+  }
+
   &:focus {
     border: 3px solid var(--color-blue);
   }
 
   &::placeholder {
     opacity: 0.3;
-  }
-
-  &--invalid {
-    border-color: var(--color-error);
   }
 }

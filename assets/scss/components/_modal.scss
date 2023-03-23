@@ -12,6 +12,10 @@
   top: 50%;
   transform: translateY(-50%);
 
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
   &__header {
     display: flex;
     align-items: center;
@@ -46,6 +50,12 @@
       .field {
         margin-bottom: 1.4rem;
       }
+
+      input[type="checkbox"] {
+        margin-right: 0.6rem;
+        width: 1.2rem;
+        height: 1.2rem;
+      }
     }
   }
 
@@ -55,6 +65,7 @@
     padding: 1rem 1.2rem;
 
     .text-btn {
+      font-size: 1.2rem;
       width: 100%;
       padding: 1rem;
     }

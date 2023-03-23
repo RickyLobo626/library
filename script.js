@@ -1,10 +1,10 @@
 "use strict";
 
 const btnsEl = document.querySelectorAll("[data-btn]");
-const bookFieldsEl = document.querySelectorAll("[data-field]");
+const bookFieldsEl = document.querySelectorAll("[data-book-inputs]");
 const addBookModalEl = document.getElementById("Modal");
 const bookListEl = document.getElementById("BookList");
-const addBookFormEl = document.getElementById("addBookForm");
+const addBookFormEl = document.getElementById("AddBookForm");
 
 let library = [];
 
@@ -17,35 +17,40 @@ function Book(book) {
 
 Book.prototype.getInfo = function () {
   const readStr = this.read ? "completed" : "not read yet";
+
   return `${this.title} by ${this.author}, ${this.pages}, ${readStr}.`;
 };
 
 const appendBook = function (books) {
   bookListEl.textContent = "";
+
   books.forEach((book) => {
     const bookItem = document.createElement("li");
     const bookCover = document.createElement("div");
+    const bookTop = document.createElement("div");
     const bookTitle = document.createElement("p");
     const bookAuthor = document.createElement("p");
-    const bookDetails = document.createElement("div");
+    const bookBottom = document.createElement("div");
     const bookPages = document.createElement("p");
     const bookRead = document.createElement("p");
 
     bookTitle.textContent = book.title;
     bookAuthor.textContent = book.author;
-    bookPages.textContent = book.pages;
-    bookRead.textContent = book.read ? "completed" : "not read yet";
+    bookPages.textContent = `${book.pages} pages`;
+    bookRead.textContent = book.read ? "Finished" : "Not read yet";
 
     bookItem.classList.add("book");
     bookTitle.classList.add("book__title");
     bookCover.classList.add("book__cover");
+    bookTop.classList.add("book__top");
     bookAuthor.classList.add("book__author");
-    bookDetails.classList.add("book__details");
+    bookBottom.classList.add("book__bottom");
     bookPages.classList.add("book__pages");
     bookRead.classList.add("book__read");
 
-    bookDetails.append(bookPages, bookRead);
-    bookCover.append(bookTitle, bookAuthor, bookDetails);
+    bookBottom.append(bookPages, bookRead);
+    bookTop.append(bookTitle, bookAuthor);
+    bookCover.append(bookTop, bookBottom);
     bookItem.appendChild(bookCover);
 
     bookListEl.appendChild(bookItem);
@@ -62,7 +67,7 @@ const addBookToLibrary = function (form) {
 const validateForm = function (fields) {
   let isValid = true;
   fields.forEach((field) => {
-    if (!field.value && field.hasAttribute("required")) {
+    if (!field.value && field.hasAttribute("data-required-field")) {
       field.classList.add("field--invalid");
       isValid = false;
     }
@@ -74,7 +79,7 @@ const validateForm = function (fields) {
 const getFieldsObj = function (fields) {
   const data = {};
   fields.forEach((field) => {
-    if (field.dataset.field == "read") {
+    if (field.dataset.bookInputs == "read") {
       data[field.name] = field.checked;
     } else {
       data[field.name] = field.value;
@@ -95,12 +100,13 @@ const resetFields = function (fields) {
 };
 
 const onSubmit = function (e) {
+  e.preventDefault();
   const formIsValid = validateForm(bookFieldsEl);
   if (!formIsValid) return;
 
-  const fieldsData = getFieldsObj(bookFieldsEl);
+  const fieldsObj = getFieldsObj(bookFieldsEl);
 
-  addBookToLibrary(fieldsData);
+  addBookToLibrary(fieldsObj);
 
   resetFields(bookFieldsEl);
   addBookModalEl.close();
@@ -109,12 +115,12 @@ const onSubmit = function (e) {
 const onOpenAddBookModal = function () {
   addBookModalEl.showModal();
 
+  addBookFormEl.addEventListener("submit", onSubmit);
+
   bookFieldsEl.forEach((field) => {
-    if (field.dataset.field != "read") {
-      field.addEventListener("keyup", (e) => {
-        field.classList.remove("field--invalid");
-      });
-    }
+    field.addEventListener("keyup", (e) => {
+      field.classList.remove("field--invalid");
+    });
   });
 };
 
@@ -126,9 +132,6 @@ btnsEl.forEach((btn) => {
         break;
       case "close-add-modal":
         addBookModalEl.close();
-        break;
-      case "add-book":
-        onSubmit(e);
         break;
     }
   });

@@ -192,6 +192,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: "Quicksand", sans-serif;
+  font-weight: 600;
 }
 
 .text-btn {
@@ -219,14 +220,14 @@ body {
   border-radius: var(--round-sm);
   outline: none;
 }
+.field--invalid {
+  border-color: var(--color-error);
+}
 .field:focus {
   border: 3px solid var(--color-blue);
 }
 .field::placeholder {
   opacity: 0.3;
-}
-.field--invalid {
-  border-color: var(--color-error);
 }
 
 .icon-btn {
@@ -281,22 +282,28 @@ body {
   border: 8px double #fff;
   display: flex;
   flex-direction: column;
+  overflow: auto;
+}
+.book__top {
+  overflow: auto;
 }
 .book__title {
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 500;
   text-align: center;
-  padding: 0.4rem;
+  padding: 0.8rem;
   padding-top: 1rem;
+  word-wrap: break-word;
 }
 .book__author {
   font-size: 1.2rem;
   font-weight: 600;
   text-transform: uppercase;
   text-align: center;
-  padding: 0.6rem;
+  word-wrap: break-word;
+  padding: 0.8rem;
 }
-.book__details {
+.book__bottom {
   font-weight: 500;
   margin-top: auto;
   padding: 0.8rem;
@@ -318,6 +325,9 @@ body {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
+}
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .modal__header {
   display: flex;
@@ -346,12 +356,18 @@ body {
 .modal__form fieldset .field {
   margin-bottom: 1.4rem;
 }
+.modal__form fieldset input[type=checkbox] {
+  margin-right: 0.6rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
 .modal__actions {
   display: flex;
   margin-top: auto;
   padding: 1rem 1.2rem;
 }
 .modal__actions .text-btn {
+  font-size: 1.2rem;
   width: 100%;
   padding: 1rem;
 }
