@@ -21,8 +21,9 @@ Book.prototype.getInfo = function () {
   return `${this.title} by ${this.author}, ${this.pages}, ${readStr}.`;
 };
 
-const createBookChildren = function () {
+const createBookPieces = function () {
   return {
+    container: document.createElement("li"),
     cover: document.createElement("div"),
     top: document.createElement("div"),
     title: document.createElement("p"),
@@ -33,35 +34,41 @@ const createBookChildren = function () {
   };
 };
 
-const addClassesToChildren = function (elements) {
+const addClassesToBookPieces = function (elements) {
   for (const key in elements) {
+    if (key == "container") {
+      elements[key].classList.add("book");
+    }
     elements[key].classList.add(`book__${key}`);
   }
 };
 
-const addTextToChildren = function (elements, book) {
+const addTextToBookPieces = function (elements, book) {
   elements.title.textContent = book.title;
   elements.author.textContent = book.author;
   elements.pages.textContent = `${book.pages} pages`;
   elements.read.textContent = book.read ? "Finished" : "Not read yet";
 };
 
-const buildBookCover = function (elements, book) {
-  addClassesToChildren(elements);
-  addTextToChildren(elements, book);
+const buildBookElement = function (bookObj) {
+  const bookPieces = createBookPieces();
+  addClassesToBookPieces(bookPieces);
+  addTextToBookPieces(bookPieces, bookObj);
 
-  const { cover, top, bottom, title, author, read, pages } = elements;
+  const { container, cover, top, bottom, title, author, read, pages } =
+    bookPieces;
 
   bottom.append(pages, read);
   top.append(title, author);
   cover.append(top, bottom);
+  container.appendChild(cover);
 
-  return cover;
+  return container;
 };
 
 const resetInputs = function (inputs) {
   inputs.forEach((input) => {
-    if (input.checked) {
+    if (input.getAttribute("type") == "checkbox") {
       input.checked = false;
     } else {
       input.value = "";
@@ -74,13 +81,8 @@ const appendBook = function (books) {
   bookListEl.textContent = "";
 
   books.forEach((book) => {
-    const bookEl = document.createElement("li");
-    bookEl.classList.add("book");
+    const bookEl = buildBookElement(book);
 
-    const bookChildrenEls = createBookChildren();
-    const bookCover = buildBookCover(bookChildrenEls, book);
-
-    bookEl.appendChild(bookCover);
     bookListEl.appendChild(bookEl);
   });
 };
@@ -101,6 +103,7 @@ const validateForm = function (inputs) {
 const getFormObj = function (form) {
   const formData = new FormData(form);
   const obj = Object.fromEntries(formData);
+  obj.read = !!obj.read;
 
   return obj;
 };
@@ -119,21 +122,23 @@ const onSubmit = function (e) {
   if (!formIsValid) return;
 
   const formObj = getFormObj(addBookFormEl);
-  formObj.read = !!formObj.read;
 
   addBookToLibrary(formObj);
   addBookModalEl.close();
+
   resetInputs(bookInputsEls);
 };
 
-const onClickAddBook = function () {
+const onOpenAddBookModal = function () {
   addBookModalEl.showModal();
   addBookFormEl.addEventListener("submit", onSubmit);
 
   bookInputsEls.forEach((input) => {
-    input.addEventListener("keyup", (e) => {
-      input.classList.remove("field--invalid");
-    });
+    if (input.classList.contains("field")) {
+      input.addEventListener("keyup", (e) => {
+        input.classList.remove("field--invalid");
+      });
+    }
   });
 };
 
@@ -141,7 +146,7 @@ btnsEls.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     switch (btn.dataset.btn) {
       case "open-add-modal":
-        onClickAddBook();
+        onOpenAddBookModal();
         break;
       case "close-add-modal":
         addBookModalEl.close();
