@@ -1,7 +1,7 @@
 "use strict";
 
-const btnsEl = document.querySelectorAll("[data-btn]");
-const bookFieldsEl = document.querySelectorAll("[data-book-inputs]");
+const btnsEls = document.querySelectorAll("[data-btn]");
+const bookInputsEls = document.querySelectorAll("[data-book-inputs]");
 const addBookModalEl = document.getElementById("Modal");
 const bookListEl = document.getElementById("BookList");
 const addBookFormEl = document.getElementById("AddBookForm");
@@ -12,7 +12,7 @@ function Book(book) {
   this.title = book.title;
   this.author = book.author;
   this.pages = book.pages;
-  this.read = book.read;
+  this.read = !!book.read;
 }
 
 Book.prototype.getInfo = function () {
@@ -21,40 +21,88 @@ Book.prototype.getInfo = function () {
   return `${this.title} by ${this.author}, ${this.pages}, ${readStr}.`;
 };
 
+const createBookChildren = function () {
+  return {
+    cover: document.createElement("div"),
+    top: document.createElement("div"),
+    title: document.createElement("p"),
+    author: document.createElement("p"),
+    bottom: document.createElement("div"),
+    pages: document.createElement("p"),
+    read: document.createElement("p"),
+  };
+};
+
+const addClassesToChildren = function (elements) {
+  for (const key in elements) {
+    elements[key].classList.add(`book__${key}`);
+  }
+};
+
+const addTextToChildren = function (elements, book) {
+  elements.title.textContent = book.title;
+  elements.author.textContent = book.author;
+  elements.pages.textContent = `${book.pages} pages`;
+  elements.read.textContent = book.read ? "Finished" : "Not read yet";
+};
+
+const buildBookCover = function (elements, book) {
+  addClassesToChildren(elements);
+  addTextToChildren(elements, book);
+
+  const { cover, top, bottom, title, author, read, pages } = elements;
+
+  bottom.append(pages, read);
+  top.append(title, author);
+  cover.append(top, bottom);
+
+  return cover;
+};
+
+const resetInputs = function (inputs) {
+  inputs.forEach((input) => {
+    if (input.checked) {
+      input.checked = false;
+    } else {
+      input.value = "";
+    }
+  });
+};
+
 const appendBook = function (books) {
+  // reset list
   bookListEl.textContent = "";
 
   books.forEach((book) => {
-    const bookItem = document.createElement("li");
-    const bookCover = document.createElement("div");
-    const bookTop = document.createElement("div");
-    const bookTitle = document.createElement("p");
-    const bookAuthor = document.createElement("p");
-    const bookBottom = document.createElement("div");
-    const bookPages = document.createElement("p");
-    const bookRead = document.createElement("p");
+    const bookEl = document.createElement("li");
+    bookEl.classList.add("book");
 
-    bookTitle.textContent = book.title;
-    bookAuthor.textContent = book.author;
-    bookPages.textContent = `${book.pages} pages`;
-    bookRead.textContent = book.read ? "Finished" : "Not read yet";
+    const bookChildrenEls = createBookChildren();
+    const bookCover = buildBookCover(bookChildrenEls, book);
 
-    bookItem.classList.add("book");
-    bookTitle.classList.add("book__title");
-    bookCover.classList.add("book__cover");
-    bookTop.classList.add("book__top");
-    bookAuthor.classList.add("book__author");
-    bookBottom.classList.add("book__bottom");
-    bookPages.classList.add("book__pages");
-    bookRead.classList.add("book__read");
-
-    bookBottom.append(bookPages, bookRead);
-    bookTop.append(bookTitle, bookAuthor);
-    bookCover.append(bookTop, bookBottom);
-    bookItem.appendChild(bookCover);
-
-    bookListEl.appendChild(bookItem);
+    bookEl.appendChild(bookCover);
+    bookListEl.appendChild(bookEl);
   });
+};
+
+const validateForm = function (inputs) {
+  let isValid = true;
+
+  inputs.forEach((input) => {
+    if (input.value == "" && input.hasAttribute("data-required-field")) {
+      input.classList.add("field--invalid");
+      isValid = false;
+    }
+  });
+
+  return isValid;
+};
+
+const getFormObj = function (form) {
+  const formData = new FormData(form);
+  const obj = Object.fromEntries(formData);
+
+  return obj;
 };
 
 const addBookToLibrary = function (form) {
@@ -64,71 +112,36 @@ const addBookToLibrary = function (form) {
   appendBook(library);
 };
 
-const validateForm = function (fields) {
-  let isValid = true;
-  fields.forEach((field) => {
-    if (!field.value && field.hasAttribute("data-required-field")) {
-      field.classList.add("field--invalid");
-      isValid = false;
-    }
-  });
-
-  return isValid;
-};
-
-const getFieldsObj = function (fields) {
-  const data = {};
-  fields.forEach((field) => {
-    if (field.dataset.bookInputs == "read") {
-      data[field.name] = field.checked;
-    } else {
-      data[field.name] = field.value;
-    }
-  });
-
-  return data;
-};
-
-const resetFields = function (fields) {
-  fields.forEach((field) => {
-    if (field.checked) {
-      field.checked = false;
-    } else {
-      field.value = "";
-    }
-  });
-};
-
 const onSubmit = function (e) {
   e.preventDefault();
-  const formIsValid = validateForm(bookFieldsEl);
+
+  const formIsValid = validateForm(bookInputsEls);
   if (!formIsValid) return;
 
-  const fieldsObj = getFieldsObj(bookFieldsEl);
+  const formObj = getFormObj(addBookFormEl);
+  formObj.read = !!formObj.read;
 
-  addBookToLibrary(fieldsObj);
-
-  resetFields(bookFieldsEl);
+  addBookToLibrary(formObj);
   addBookModalEl.close();
+  resetInputs(bookInputsEls);
 };
 
-const onOpenAddBookModal = function () {
+const onClickAddBook = function () {
   addBookModalEl.showModal();
-
   addBookFormEl.addEventListener("submit", onSubmit);
 
-  bookFieldsEl.forEach((field) => {
-    field.addEventListener("keyup", (e) => {
-      field.classList.remove("field--invalid");
+  bookInputsEls.forEach((input) => {
+    input.addEventListener("keyup", (e) => {
+      input.classList.remove("field--invalid");
     });
   });
 };
 
-btnsEl.forEach((btn) => {
+btnsEls.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     switch (btn.dataset.btn) {
       case "open-add-modal":
-        onOpenAddBookModal();
+        onClickAddBook();
         break;
       case "close-add-modal":
         addBookModalEl.close();

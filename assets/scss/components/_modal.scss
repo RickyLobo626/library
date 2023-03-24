@@ -19,7 +19,7 @@
   &__header {
     display: flex;
     align-items: center;
-    padding: 1rem 1.2rem;
+    padding: 1.4rem 1.8rem 1rem;
     margin-bottom: 1rem;
   }
 
@@ -36,7 +36,7 @@
 
   &__form {
     fieldset {
-      padding: 1.6rem 1.2rem;
+      padding: 1.6rem 1.8rem;
 
       legend {
         margin-bottom: 1rem;
@@ -62,7 +62,7 @@
   &__actions {
     display: flex;
     margin-top: auto;
-    padding: 1rem 1.2rem;
+    padding: 1.4rem 1.8rem;
 
     .text-btn {
       font-size: 1.2rem;

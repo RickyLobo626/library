@@ -332,7 +332,7 @@ body {
 .modal__header {
   display: flex;
   align-items: center;
-  padding: 1rem 1.2rem;
+  padding: 1.4rem 1.8rem 1rem;
   margin-bottom: 1rem;
 }
 .modal__title {
@@ -344,7 +344,7 @@ body {
   margin: -5px -5px 0 auto;
 }
 .modal__form fieldset {
-  padding: 1.6rem 1.2rem;
+  padding: 1.6rem 1.8rem;
 }
 .modal__form fieldset legend {
   margin-bottom: 1rem;
@@ -364,7 +364,7 @@ body {
 .modal__actions {
   display: flex;
   margin-top: auto;
-  padding: 1rem 1.2rem;
+  padding: 1.4rem 1.8rem;
 }
 .modal__actions .text-btn {
   font-size: 1.2rem;
