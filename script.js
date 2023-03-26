@@ -21,49 +21,129 @@ Book.prototype.getInfo = function () {
   return `${this.title} by ${this.author}, ${this.pages}, ${readStr}.`;
 };
 
-const createBookPieces = function () {
-  return {
-    container: document.createElement("li"),
-    cover: document.createElement("div"),
-    top: document.createElement("div"),
-    title: document.createElement("p"),
-    author: document.createElement("p"),
-    bottom: document.createElement("div"),
-    pages: document.createElement("p"),
-    read: document.createElement("p"),
-  };
-};
-
-const addClassesToBookPieces = function (elements) {
+const addClassesToBookParts = function (elements) {
   for (const key in elements) {
-    if (key == "container") {
-      elements[key].classList.add("book");
+    const classes = [];
+
+    if (key != "book") {
+      classes.push(key.replace("book", "book__").toLowerCase());
+    } else {
+      classes.push(key);
     }
-    elements[key].classList.add(`book__${key}`);
+
+    classes.forEach((cls) => {
+      elements[key].classList.add(cls);
+    });
   }
 };
 
-const addTextToBookPieces = function (elements, book) {
-  elements.title.textContent = book.title;
-  elements.author.textContent = book.author;
-  elements.pages.textContent = `${book.pages} pages`;
-  elements.read.textContent = book.read ? "Finished" : "Not read yet";
+const addTextToBookParts = function (elements, book) {
+  elements.bookTitle.textContent = book.title;
+  elements.bookAuthor.textContent = book.author;
+  elements.bookPages.textContent = `${book.pages} pages`;
+  elements.bookRead.textContent = book.read ? "Finished" : "Not read yet";
 };
 
-const buildBookElement = function (bookObj) {
-  const bookPieces = createBookPieces();
-  addClassesToBookPieces(bookPieces);
-  addTextToBookPieces(bookPieces, bookObj);
+const addTextToActionParts = function (elements) {
+  elements.inputSwitchText.textContent = "read";
+  elements.actionsDelete.textContent = "remove";
+};
 
-  const { container, cover, top, bottom, title, author, read, pages } =
-    bookPieces;
+const createBookElement = function (bookObj) {
+  const allParts = {
+    book: document.createElement("div"),
+    bookCover: document.createElement("div"),
+    bookTop: document.createElement("div"),
+    bookTitle: document.createElement("p"),
+    bookAuthor: document.createElement("p"),
+    bookBottom: document.createElement("div"),
+    bookPages: document.createElement("p"),
+    bookRead: document.createElement("p"),
+  };
 
-  bottom.append(pages, read);
-  top.append(title, author);
-  cover.append(top, bottom);
-  container.appendChild(cover);
+  addClassesToBookParts(allParts);
+  addTextToBookParts(allParts, bookObj);
 
-  return container;
+  const {
+    book,
+    bookCover,
+    bookTop,
+    bookTitle,
+    bookAuthor,
+    bookBottom,
+    bookPages,
+    bookRead,
+  } = allParts;
+  bookBottom.append(bookPages, bookRead);
+  bookTop.append(bookTitle, bookAuthor);
+  bookCover.append(bookTop, bookBottom);
+  book.appendChild(bookCover);
+
+  return book;
+};
+
+const addClassesToActionParts = function (elements) {
+  for (const key in elements) {
+    const classes = [];
+    switch (true) {
+      case key == "inputSwitch":
+        classes.push("switch");
+        break;
+      case key == "actions":
+        classes.push("book-actions");
+        break;
+      case key == "actionsDelete":
+        classes.push("book-actions__delete", "text-btn");
+        break;
+      case key.startsWith("inputSwitch"):
+        classes.push(key.replace("inputSwitch", "switch__").toLowerCase());
+        break;
+      default:
+        classes.push(key);
+    }
+
+    classes.forEach((cls) => {
+      elements[key].classList.add(cls);
+    });
+  }
+};
+
+const createActionsElement = function () {
+  const allParts = {
+    actions: document.createElement("div"),
+    actionsDelete: document.createElement("button"),
+    inputSwitch: document.createElement("label"),
+    inputSwitchCheckbox: document.createElement("input"),
+    inputSwitchSlider: document.createElement("span"),
+    inputSwitchText: document.createElement("span"),
+  };
+
+  addClassesToActionParts(allParts);
+  addTextToActionParts(allParts);
+
+  const {
+    inputSwitch,
+    inputSwitchCheckbox,
+    inputSwitchSlider,
+    inputSwitchText,
+    actionsDelete,
+    actions,
+  } = allParts;
+
+  inputSwitch.append(inputSwitchCheckbox, inputSwitchSlider, inputSwitchText);
+  actions.append(inputSwitch, actionsDelete);
+
+  return actions;
+};
+
+const buildBookItem = function (bookObj) {
+  const book = createBookElement(bookObj);
+  const bookActions = createActionsElement();
+  const gridItem = document.createElement("li");
+  gridItem.append(book, bookActions);
+  gridItem.classList.add("grid__item");
+
+  return gridItem;
 };
 
 const resetInputs = function (inputs) {
@@ -73,17 +153,6 @@ const resetInputs = function (inputs) {
     } else {
       input.value = "";
     }
-  });
-};
-
-const appendBook = function (books) {
-  // reset list
-  bookListEl.textContent = "";
-
-  books.forEach((book) => {
-    const bookEl = buildBookElement(book);
-
-    bookListEl.appendChild(bookEl);
   });
 };
 
@@ -112,7 +181,15 @@ const addBookToLibrary = function (form) {
   const book = new Book(form);
 
   library.push(book);
-  appendBook(library);
+
+  // reset list
+  bookListEl.textContent = "";
+
+  library.forEach((book) => {
+    const bookItemEl = buildBookItem(book);
+
+    bookListEl.appendChild(bookItemEl);
+  });
 };
 
 const onSubmit = function (e) {

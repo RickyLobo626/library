@@ -4,13 +4,13 @@ body {
 }
 
 body {
-  background: rgb(148, 163, 184);
+  background: var(--color-blue);
   background: linear-gradient(
-    294deg,
-    rgba(148, 163, 184, 1) 0%,
-    rgba(203, 213, 225, 1) 40%,
-    rgba(203, 213, 225, 1) 60%,
-    rgba(148, 163, 184, 1) 100%
+    160deg,
+    var(--color-blue) 0%,
+    var(--color-blue-lighten) 25%,
+    var(--color-blue-lighten) 75%,
+    var(--color-blue) 100%
   );
   background-repeat: no-repeat;
   background-attachment: fixed;

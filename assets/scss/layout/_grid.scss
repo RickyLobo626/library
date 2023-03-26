@@ -10,4 +10,11 @@
   &:empty {
     display: none;
   }
+
+  &__item {
+    flex-basis: 15rem;
+    max-height: 20rem;
+    min-width: 15rem;
+    height: 20rem;
+  }
 }
