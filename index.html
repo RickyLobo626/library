@@ -12,7 +12,9 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src="script.js" defer></script>
+    <script type="module" src="./scripts/createElements.js"></script>
+    <script type="module" src="./scripts/Book.js"></script>
+    <script type="module" src="./scripts/main.js" defer></script>
   </head>
   <body>
     <header class="header">
@@ -51,16 +53,16 @@
 
       <button
         class="main__add icon-btn icon-btn--elevated color-blue"
-        data-btn="open-add-modal"
+        data-btn="open-modal-add"
       >
         &plus;
       </button>
-      <dialog class="modal" id="Modal">
+      <dialog class="modal" id="ModalAddBook">
         <header class="modal__header">
           <p class="modal__title">Add a book</p>
           <button
             class="modal__close icon-btn icon-btn--small"
-            data-btn="close-add-modal"
+            data-btn="close-modal-add"
           >
             &times;
           </button>

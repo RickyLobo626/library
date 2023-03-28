@@ -401,10 +401,6 @@ body {
   border: 8px double #fff;
   display: flex;
   flex-direction: column;
-  overflow: auto;
-}
-.book__top {
-  overflow: auto;
 }
 .book__title {
   font-size: 2rem;
