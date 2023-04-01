@@ -1,5 +1,9 @@
-import { createActionsElement } from "./createElements.js";
-import { createBookElement } from "./createElements.js";
+import {
+  getActionsElements,
+  getBookElements,
+  getGridItemElement,
+} from "./getElements.js";
+
 import Book from "./Book.js";
 
 ("use strict");
@@ -11,17 +15,6 @@ const btnsEls = document.querySelectorAll("[data-btn]");
 const addBookInputEls = document.querySelectorAll("[data-book-inputs]");
 
 let library = [];
-
-const buildBookContainer = function (bookObj, index) {
-  const bookEl = createBookElement(bookObj);
-  const bookActionsEl = createActionsElement(index);
-  const gridItem = document.createElement("li");
-
-  gridItem.append(bookEl, bookActionsEl);
-  gridItem.classList.add("grid__item");
-
-  return gridItem;
-};
 
 const resetInputs = function (inputs) {
   inputs.forEach((input) => {
@@ -62,14 +55,36 @@ const addBookToLibrary = function (formObj) {
   // reset list
   bookListEl.textContent = "";
 
-  library.forEach((book, index, arr) => {
-    const bookItemEl = buildBookContainer(book, index);
-    bookListEl.appendChild(bookItemEl);
+  library.forEach((book, index) => {
+    const { container: bookContainer, read } = getBookElements(book);
 
-    // TODO: Remove Item from array and dom
-    const bookActionsInputEls = document.querySelectorAll(
-      "[data-book-actions]"
-    );
+    const {
+      container: actionsContainer,
+      switchInput,
+      deleteBtn,
+    } = getActionsElements();
+
+    const gridItem = getGridItemElement(bookContainer, actionsContainer);
+
+    gridItem.append(bookContainer, actionsContainer);
+    bookListEl.appendChild(gridItem);
+
+    // Action Events
+    switchInput.addEventListener("click", (e) => {
+      book.read = !book.read;
+      read.textContent = book.read ? "Read" : "Not read yet";
+    });
+
+    deleteBtn.addEventListener("click", (e) => {
+      const foundIndex = library.findIndex((item) => {
+        return Object.is(item, book);
+      });
+
+      library.splice(foundIndex, 1); // Remove from array
+      gridItem.remove(); // Remove from dom
+
+      console.log(library);
+    });
   });
 };
 
@@ -100,10 +115,6 @@ const onOpenModalAddBook = function () {
   });
 };
 
-const onCloseModalAddBook = function () {
-  modalAddBookEl.close();
-};
-
 btnsEls.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     switch (btn.dataset.btn) {
@@ -111,7 +122,7 @@ btnsEls.forEach((btn) => {
         onOpenModalAddBook();
         break;
       case "close-modal-add":
-        onCloseModalAddBook();
+        modalAddBookEl.close();
         break;
     }
   });
