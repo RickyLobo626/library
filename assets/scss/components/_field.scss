@@ -5,16 +5,34 @@
   padding: 0.8em 1em;
   border-radius: var(--round-sm);
   outline: none;
+  transition: border 0.4s;
 
-  &--invalid {
-    border-color: var(--color-error);
+  & + .error-message {
+    color: var(--color-error);
+    margin-left: 0.4rem;
+
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 0.4s;
   }
 
-  &:focus {
-    border: 3px solid var(--color-blue);
+  &:focus:not(&--invalid) {
+    border-color: var(--color-blue);
   }
 
   &::placeholder {
     opacity: 0.3;
+  }
+
+  &--invalid {
+    border-color: var(--color-error);
+    & + .error-message {
+      visibility: visible;
+      opacity: 1;
+      line-height: 2;
+      font-size: 0.8rem;
+    }
   }
 }

@@ -8,11 +8,11 @@ import Book from "./Book.js";
 
 ("use strict");
 
-const modalAddBookEl = document.getElementById("ModalAddBook");
 const bookListEl = document.getElementById("BookList");
+const addBookModalEl = document.getElementById("ModalAddBook");
 const addBookFormEl = document.getElementById("AddBookForm");
-const btnsEls = document.querySelectorAll("[data-btn]");
 const addBookInputEls = document.querySelectorAll("[data-book-inputs]");
+const btnsEls = document.querySelectorAll("[data-btn]");
 
 let library = [];
 
@@ -21,6 +21,7 @@ const resetInputs = function (inputs) {
     if (input.getAttribute("type") == "checkbox") {
       input.checked = false;
     } else {
+      input.classList.remove("field--invalid");
       input.value = "";
     }
   });
@@ -30,7 +31,7 @@ const validateForm = function (inputs) {
   let isValid = true;
 
   inputs.forEach((input) => {
-    if (input.value == "" && input.hasAttribute("data-required-field")) {
+    if (input.value == "" && input.hasAttribute("required")) {
       input.classList.add("field--invalid");
       isValid = false;
     }
@@ -76,14 +77,12 @@ const addBookToLibrary = function (formObj) {
     });
 
     deleteBtn.addEventListener("click", (e) => {
-      const foundIndex = library.findIndex((item) => {
+      const bookIndex = library.findIndex((item) => {
         return Object.is(item, book);
       });
 
-      library.splice(foundIndex, 1); // Remove from array
+      library.splice(bookIndex, 1); // Remove from array
       gridItem.remove(); // Remove from dom
-
-      console.log(library);
     });
   });
 };
@@ -92,18 +91,19 @@ const onSubmit = function (e) {
   e.preventDefault();
 
   const formIsValid = validateForm(addBookInputEls);
+
   if (!formIsValid) return;
 
   const formObj = getFormObj(addBookFormEl);
 
   addBookToLibrary(formObj);
-  modalAddBookEl.close();
+  addBookModalEl.close();
 
   resetInputs(addBookInputEls);
 };
 
 const onOpenModalAddBook = function () {
-  modalAddBookEl.showModal();
+  addBookModalEl.showModal();
   addBookFormEl.addEventListener("submit", onSubmit);
 
   addBookInputEls.forEach((input) => {
@@ -115,6 +115,11 @@ const onOpenModalAddBook = function () {
   });
 };
 
+const onCloseModalAddBook = function () {
+  addBookModalEl.close();
+  resetInputs(addBookInputEls);
+};
+
 btnsEls.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     switch (btn.dataset.btn) {
@@ -122,7 +127,7 @@ btnsEls.forEach((btn) => {
         onOpenModalAddBook();
         break;
       case "close-modal-add":
-        modalAddBookEl.close();
+        onCloseModalAddBook();
         break;
     }
   });

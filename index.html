@@ -25,7 +25,6 @@
     </header>
     <main class="main">
       <ul id="BookList" class="grid">
-
         <!-- for testing -->
         <!-- <li class="grid__item">
           <div class="book">
@@ -68,57 +67,72 @@
           </button>
         </header>
 
-        <form id="AddBookForm" class="modal__form" action="#">
+        <form id="AddBookForm" class="modal__form" action="#" novalidate>
           <fieldset>
             <legend>Which book would you like to add?</legend>
-            <label for="title">Title</label>
-            <input
-              id="title"
-              name="title"
-              type="text"
-              class="field"
-              maxlength="75"
-              placeholder="The Hobbit"
-              data-book-inputs="title"
-              data-required-field
-            />
-            <label for="author">Author</label>
-            <input
-              id="author"
-              name="author"
-              type="text"
-              class="field"
-              maxlength="50"
-              placeholder="J. R. R. Tolkien"
-              data-book-inputs="author"
-              data-required-field
-            />
-            <label for="pages">Number of pages</label>
-            <input
-              id="pages"
-              name="pages"
-              type="number"
-              class="field"
-              placeholder="310"
-              max="99999"
-              data-book-inputs="pages"
-              data-required-field
-            />
-
-          
-              <label>  
+            <div class="form-control">
+              <label for="title">Title</label>
               <input
-                type="checkbox"
-                id="read"
-                name="read"
-                data-book-inputs="read"
-                
-              />I've read this book</label>
+                id="title"
+                name="title"
+                type="text"
+                class="field"
+                maxlength="75"
+                placeholder="The Hobbit"
+                data-book-inputs="title"
+                required
+              />
+              <p class="error-message">This field is required</p>
+            </div>
+
+            <div class="form-control">
+              <label for="author">Author</label>
+              <input
+                id="author"
+                name="author"
+                type="text"
+                class="field"
+                maxlength="50"
+                placeholder="J. R. R. Tolkien"
+                data-book-inputs="author"
+                required
+              />
+              <p class="error-message">This field is required</p>
+            </div>
+            <div class="form-control">
+              <label for="pages">Number of pages</label>
+              <input
+                id="pages"
+                name="pages"
+                type="number"
+                class="field"
+                placeholder="310"
+                max="99999"
+                data-book-inputs="pages"
+                required
+              />
+              <p class="error-message">This field is required</p>
+            </div>
+
+            <div class="form-control">
+              <label for="read">
+                <input
+                  type="checkbox"
+                  id="read"
+                  name="read"
+                  data-book-inputs="read"
+                />
+                <span>I've read this book</span>
+              </label>
             </div>
           </fieldset>
         </form>
         <div class="modal__actions">
-          <button type="submit" form="AddBookForm" class="text-btn bg-blue color-white">
+          <button
+            type="submit"
+            form="AddBookForm"
+            class="text-btn bg-blue color-white"
+          >
             Add
           </button>
         </div>
