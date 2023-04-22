@@ -1,7 +1,7 @@
 import {
-  getActionsElements,
-  getBookElements,
-  getGridItemElement,
+  createActionsElements,
+  createBookElements,
+  createGridItemElement,
 } from "./getElements.js";
 
 import Book from "./Book.js";
@@ -57,15 +57,15 @@ const addBookToLibrary = function (formObj) {
   bookListEl.textContent = "";
 
   library.forEach((book, index) => {
-    const { container: bookContainer, read } = getBookElements(book);
+    const { container: bookContainer, read } = createBookElements(book);
 
     const {
       container: actionsContainer,
       switchInput,
       deleteBtn,
-    } = getActionsElements();
+    } = createActionsElements();
 
-    const gridItem = getGridItemElement(bookContainer, actionsContainer);
+    const gridItem = createGridItemElement(bookContainer, actionsContainer);
 
     gridItem.append(bookContainer, actionsContainer);
     bookListEl.appendChild(gridItem);
@@ -97,6 +97,7 @@ const onSubmit = function (e) {
   const formObj = getFormObj(addBookFormEl);
 
   addBookToLibrary(formObj);
+
   addBookModalEl.close();
 
   resetInputs(addBookInputEls);

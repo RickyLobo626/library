@@ -1,68 +1,61 @@
-export const getBookElements = function (bookObj) {
-  const els = {
-    container: document.createElement("div"),
-    cover: document.createElement("div"),
-    top: document.createElement("div"),
-    title: document.createElement("p"),
-    author: document.createElement("p"),
-    bottom: document.createElement("div"),
-    pages: document.createElement("p"),
-    read: document.createElement("p"),
-  };
+const createEl = function (tag, styleClasses, content) {
+  const el = document.createElement(tag);
 
-  els.title.textContent = bookObj.title;
-  els.author.textContent = bookObj.author;
-  els.pages.textContent = `${bookObj.pages} pages`;
-  els.read.innerHTML = bookObj.read ? "Read" : "Not read yet";
+  el.textContent = content;
 
-  els.container.classList.add("book");
-  els.cover.classList.add("book__cover");
-  els.top.classList.add("book__top");
-  els.title.classList.add("book__title");
-  els.author.classList.add("book__author");
-  els.bottom.classList.add("book__bottom");
-  els.pages.classList.add("book__pages");
-  els.read.classList.add("book__read");
+  if (Array.isArray(styleClasses)) {
+    el.classList.add(...styleClasses);
+  } else {
+    el.classList.add(styleClasses);
+  }
 
-  els.bottom.append(els.pages, els.read);
-  els.top.append(els.title, els.author);
-  els.cover.append(els.top, els.bottom);
-  els.container.appendChild(els.cover);
-
-  return els;
+  return el;
 };
 
-export const getActionsElements = function () {
-  const els = {
-    container: document.createElement("div"),
-    deleteBtn: document.createElement("button"),
-    switch: document.createElement("label"),
-    switchInput: document.createElement("input"),
-    switchSlider: document.createElement("span"),
-    switchText: document.createElement("span"),
-  };
+export const createBookElements = function (bookObj) {
+  const container = createEl("div", "book");
+  const cover = createEl("div", "book__cover");
+  const top = createEl("div", "book__top");
+  const title = createEl("p", "book__title", bookObj.title);
+  const author = createEl("p", "book__author", bookObj.author);
+  const bottom = createEl("div", "book__bottom");
+  const pages = createEl("p", "book__pages", bookObj.pages);
+  const read = createEl(
+    "p",
+    "book__read",
+    bookObj.read ? "Read" : "Not read yet"
+  );
 
-  els.switchInput.setAttribute("type", "checkbox");
-  els.switchText.textContent = "read";
-  els.deleteBtn.textContent = "delete";
+  bottom.append(pages, read);
+  top.append(title, author);
+  cover.append(top, bottom);
+  container.appendChild(cover);
 
-  els.container.classList.add("book-actions");
-  els.deleteBtn.classList.add("book-actions__delete", "text-btn");
-  els.switch.classList.add("switch");
-  els.switchInput.classList.add("switch__input");
-  els.switchSlider.classList.add("switch__slider");
-  els.switchText.classList.add("switch__text");
-
-  els.switch.append(els.switchInput, els.switchSlider, els.switchText);
-
-  els.container.append(els.switch, els.deleteBtn);
-
-  return els;
+  return { container, read };
 };
 
-export const getGridItemElement = function (book, actions) {
-  const gridItem = document.createElement("li");
-  gridItem.classList.add("grid__item");
+export const createActionsElements = function () {
+  const container = createEl("div", "book-actions");
+  const switchLabel = createEl("label", "switch");
+  const switchInput = createEl("input", "switch__input");
+  const switchSlider = createEl("span", "switch__slider");
+  const switchText = createEl("span", "switch__text", "read");
+  const deleteBtn = createEl(
+    "button",
+    ["book-actions__delete", "text-btn"],
+    "delete"
+  );
+
+  switchInput.setAttribute("type", "checkbox");
+
+  switchLabel.append(switchInput, switchSlider, switchText);
+  container.append(switchLabel, deleteBtn);
+
+  return { container, switchInput, deleteBtn };
+};
+
+export const createGridItemElement = function (book, actions) {
+  const gridItem = createEl("li", "grid__item");
 
   gridItem.append(book, actions);
 
