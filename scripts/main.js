@@ -1,8 +1,4 @@
-import {
-  createActionsElements,
-  createBookElements,
-  createGridItemElement,
-} from "./getElements.js";
+import { createBookEl } from "./getElements.js";
 
 import Book from "./Book.js";
 
@@ -57,32 +53,23 @@ const addBookToLibrary = function (formObj) {
   bookListEl.textContent = "";
 
   library.forEach((book, index) => {
-    const { container: bookContainer, read } = createBookElements(book);
+    const bookContainer = createBookEl(book);
 
-    const {
-      container: actionsContainer,
-      switchInput,
-      deleteBtn,
-    } = createActionsElements();
-
-    const gridItem = createGridItemElement(bookContainer, actionsContainer);
-
-    gridItem.append(bookContainer, actionsContainer);
-    bookListEl.appendChild(gridItem);
+    bookListEl.appendChild(bookContainer.el);
 
     // Action Events
-    switchInput.addEventListener("click", (e) => {
+    bookContainer.switchInput.addEventListener("click", (e) => {
       book.read = !book.read;
-      read.textContent = book.read ? "Read" : "Not read yet";
+      bookContainer.toggleRead(book.read);
     });
 
-    deleteBtn.addEventListener("click", (e) => {
+    bookContainer.deleteBtn.addEventListener("click", (e) => {
       const bookIndex = library.findIndex((item) => {
         return Object.is(item, book);
       });
 
       library.splice(bookIndex, 1); // Remove from array
-      gridItem.remove(); // Remove from dom
+      bookContainer.el.remove(); // Remove from dom
     });
   });
 };

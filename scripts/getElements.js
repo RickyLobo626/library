@@ -12,8 +12,8 @@ const createEl = function (tag, styleClasses, content) {
   return el;
 };
 
-export const createBookElements = function (bookObj) {
-  const container = createEl("div", "book");
+const createBookBodyEls = function (bookObj) {
+  const book = createEl("div", "book");
   const cover = createEl("div", "book__cover");
   const top = createEl("div", "book__top");
   const title = createEl("p", "book__title", bookObj.title);
@@ -29,13 +29,13 @@ export const createBookElements = function (bookObj) {
   bottom.append(pages, read);
   top.append(title, author);
   cover.append(top, bottom);
-  container.appendChild(cover);
+  book.appendChild(cover);
 
-  return { container, read };
+  return { book, read };
 };
 
-export const createActionsElements = function () {
-  const container = createEl("div", "book-actions");
+const createBookActionsEls = function (bookObj) {
+  const actions = createEl("div", "book-actions");
   const switchLabel = createEl("label", "switch");
   const switchInput = createEl("input", "switch__input");
   const switchSlider = createEl("span", "switch__slider");
@@ -49,15 +49,24 @@ export const createActionsElements = function () {
   switchInput.setAttribute("type", "checkbox");
 
   switchLabel.append(switchInput, switchSlider, switchText);
-  container.append(switchLabel, deleteBtn);
+  actions.append(switchLabel, deleteBtn);
 
-  return { container, switchInput, deleteBtn };
+  return { actions, switchInput, deleteBtn };
 };
 
-export const createGridItemElement = function (book, actions) {
-  const gridItem = createEl("li", "grid__item");
+export const createBookEl = function (bookObj) {
+  const el = createEl("li", "grid__item");
+  const { book, read } = createBookBodyEls(bookObj);
+  const { actions, switchInput, deleteBtn } = createBookActionsEls(bookObj);
 
-  gridItem.append(book, actions);
+  el.append(book, actions);
 
-  return gridItem;
+  return {
+    el,
+    switchInput,
+    deleteBtn,
+    toggleRead(flag) {
+      read.textContent = flag ? "Read" : "Not read yet";
+    },
+  };
 };
