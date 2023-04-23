@@ -12,8 +12,8 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script type="module" src="./scripts/getElements.js"></script>
-    <script type="module" src="./scripts/Book.js"></script>
+    <script type="module" src="./scripts/createElements.js"></script>
+    <script type="module" src="./scripts/createBook.js"></script>
     <script type="module" src="./scripts/main.js" defer></script>
   </head>
   <body>
@@ -67,7 +67,7 @@
           </button>
         </header>
 
-        <form id="AddBookForm" class="modal__form" action="#" novalidate>
+        <form id="FormAddBook" class="modal__form" action="#" novalidate>
           <fieldset>
             <legend>Which book would you like to add?</legend>
             <div class="form-control">
@@ -130,7 +130,7 @@
         <div class="modal__actions">
           <button
             type="submit"
-            form="AddBookForm"
+            form="FormAddBook"
             class="text-btn bg-blue color-white"
           >
             Add
