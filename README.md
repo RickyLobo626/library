@@ -2,7 +2,7 @@
 
 The Odin Project - Library
 
-In this project I learned how to create Object constructors and Factory functions!
+In this project I learned how to create Factory functions!
 
 Skills used for this project:
 
