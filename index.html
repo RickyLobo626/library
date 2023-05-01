@@ -24,119 +24,112 @@
       </button>
     </header>
     <main class="main">
-      <ul id="BookList" class="grid">
-        <!-- for testing -->
-        <!-- <li class="grid__item">
-          <div class="book">
-            <div class="book__cover">
-              <div class="book__top">
-                <p class="book__title">Test</p>
-                <p class="book__author">test</p>
-              </div>
-              <div class="book__bottom">
-                <p class="book__pages">333</p>
-                <p class="book__read">read</p>
-              </div>
-            </div>
-          </div>
-          <div class="book-actions">
-            <label class="switch">
-              <input type="checkbox" class="switch__checkbox">
-              <span class="switch__slider"></span>
-              <span class="switch__text">read</span>
-            </label>
-            <button class="book-actions__delete text-btn" data-btn="delete-book">Remove</button>
-          </div>
-        </li> -->
-      </ul>
+      <ul id="BookList" class="grid"></ul>
 
       <button
         class="main__add icon-btn icon-btn--elevated color-blue"
-        data-btn="open-modal-add"
+        data-click="open-modal-add"
       >
         &plus;
       </button>
-      <dialog class="modal" id="ModalAddBook">
-        <header class="modal__header">
-          <p class="modal__title">Add a book</p>
-          <button
-            class="modal__close icon-btn icon-btn--small"
-            data-btn="close-modal-add"
-          >
-            &times;
-          </button>
-        </header>
 
-        <form id="FormAddBook" class="modal__form" action="#" novalidate>
-          <fieldset>
-            <legend>Which book would you like to add?</legend>
-            <div class="form-control">
-              <label for="title">Title</label>
-              <input
-                id="title"
-                name="title"
-                type="text"
-                class="field"
-                maxlength="75"
-                placeholder="The Hobbit"
-                data-book-inputs="title"
-                required
-              />
-              <p class="error-message">This field is required</p>
-            </div>
-
-            <div class="form-control">
-              <label for="author">Author</label>
-              <input
-                id="author"
-                name="author"
-                type="text"
-                class="field"
-                maxlength="50"
-                placeholder="J. R. R. Tolkien"
-                data-book-inputs="author"
-                required
-              />
-              <p class="error-message">This field is required</p>
-            </div>
-            <div class="form-control">
-              <label for="pages">Number of pages</label>
-              <input
-                id="pages"
-                name="pages"
-                type="number"
-                class="field"
-                placeholder="310"
-                max="99999"
-                data-book-inputs="pages"
-                required
-              />
-              <p class="error-message">This field is required</p>
-            </div>
-
-            <div class="form-control">
-              <label for="read">
+      <!-- START -->
+      <div
+        class="modal-overlay hidden"
+        id="ModalAddBookOverlay"
+        data-click="close-modal-add"
+      >
+        <div class="modal add-book" id="ModalAddBook">
+          <header class="add-book__header">
+            <p class="add-book__title">Add a book</p>
+            <button
+              class="modal__close icon-btn icon-btn--small"
+              data-click="close-modal-add"
+            >
+              &times;
+            </button>
+          </header>
+          <form id="FormAddBook" class="add-book__form" action="#" novalidate>
+            <fieldset>
+              <legend>Which book would you like to add?</legend>
+              <div class="form-control">
+                <label for="title">Title</label>
                 <input
-                  type="checkbox"
-                  id="read"
-                  name="read"
-                  data-book-inputs="read"
+                  id="title"
+                  name="title"
+                  type="text"
+                  class="field"
+                  maxlength="75"
+                  placeholder="The Hobbit"
+                  data-book-inputs="title"
+                  required
                 />
-                <span>I've read this book</span>
-              </label>
-            </div>
-          </fieldset>
-        </form>
-        <div class="modal__actions">
-          <button
-            type="submit"
-            form="FormAddBook"
-            class="text-btn bg-blue color-white"
-          >
-            Add
-          </button>
+                <p class="error-message">This field is required</p>
+              </div>
+              <div class="form-control">
+                <label for="author">Author</label>
+                <input
+                  id="author"
+                  name="author"
+                  type="text"
+                  class="field"
+                  maxlength="50"
+                  placeholder="J. R. R. Tolkien"
+                  data-book-inputs="author"
+                  required
+                />
+                <p class="error-message">This field is required</p>
+              </div>
+              <div class="form-control">
+                <label for="pages">Number of pages</label>
+                <input
+                  id="pages"
+                  name="pages"
+                  type="number"
+                  class="field"
+                  placeholder="310"
+                  max="99999"
+                  data-book-inputs="pages"
+                  required
+                />
+                <p class="error-message">This field is required</p>
+              </div>
+              <div class="form-control">
+                <label for="read">
+                  <input
+                    type="checkbox"
+                    id="read"
+                    name="read"
+                    data-book-inputs="read"
+                  />
+                  <span>I've read this book</span>
+                </label>
+              </div>
+            </fieldset>
+          </form>
+          <div class="add-book__actions">
+            <button
+              type="submit"
+              form="FormAddBook"
+              class="text-btn bg-blue color-white"
+            >
+              Add
+            </button>
+          </div>
         </div>
-      </dialog>
+      </div>
+      <!-- END -->
+
+      <div class="modal-overlay hidden" id="modal-overlay">
+        <div class="modal" id="modal">
+          <div class="modal__content">
+            <p class="modal__text" id="modal-text">you won!</p>
+            <button class="modal__restart btn" id="restart-btn">
+              play again
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
   </body>
 </html>

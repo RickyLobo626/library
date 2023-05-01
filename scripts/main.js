@@ -4,9 +4,11 @@ import { createBook } from "./createBook.js";
 
 const bookListEl = document.getElementById("BookList");
 const modalAddBookEl = document.getElementById("ModalAddBook");
+const modalAddBookOverlayEl = document.getElementById("ModalAddBookOverlay");
 const formAddBookEl = document.getElementById("FormAddBook");
 const inputsAddBookEls = document.querySelectorAll("[data-book-inputs]");
-const btnsEls = document.querySelectorAll("[data-btn]");
+const btnsEls = document.querySelectorAll("[data-click]");
+// const main = document.querySelector(".main")
 
 let library = [];
 
@@ -76,13 +78,18 @@ const onSubmit = function (e) {
 
   addBookToLibrary(formObj);
 
-  modalAddBookEl.close();
+  closeModalAddBook();
 
   resetInputs(inputsAddBookEls);
 };
 
-const onOpenModalAddBook = function () {
-  modalAddBookEl.showModal();
+const openModalAddBook = function () {
+  modalAddBookOverlayEl.classList.remove("hidden");
+
+  setTimeout(() => {
+    modalAddBookEl.classList.add("modal--open");
+  }, 50);
+
   formAddBookEl.addEventListener("submit", onSubmit);
 
   inputsAddBookEls.forEach((input) => {
@@ -94,20 +101,29 @@ const onOpenModalAddBook = function () {
   });
 };
 
-const onCloseModalAddBook = function () {
-  modalAddBookEl.close();
+const closeModalAddBook = function () {
+  setTimeout(() => {
+    modalAddBookEl.classList.remove("modal--open");
+  }, 50);
+
+  modalAddBookOverlayEl.classList.add("hidden");
+
   resetInputs(inputsAddBookEls);
 };
 
 btnsEls.forEach((btn) => {
   btn.addEventListener("click", (e) => {
-    switch (btn.dataset.btn) {
+    switch (btn.dataset.click) {
       case "open-modal-add":
-        onOpenModalAddBook();
+        openModalAddBook();
         break;
       case "close-modal-add":
-        onCloseModalAddBook();
+        closeModalAddBook();
         break;
     }
   });
+});
+
+modalAddBookEl.addEventListener("click", (e) => {
+  e.stopPropagation();
 });
