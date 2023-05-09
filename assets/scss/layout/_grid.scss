@@ -1,11 +1,11 @@
 .grid {
   height: 100%;
-  display: flex;
+  display: grid;
   justify-content: center;
-
-  flex-wrap: wrap;
-  column-gap: 4rem;
-  row-gap: 3rem;
+  grid-template-columns: repeat(auto-fit, 14rem);
+  grid-auto-rows: 22rem;
+  column-gap: 3rem;
+  row-gap: 2rem;
 
   &:empty {
     display: none;
@@ -14,9 +14,5 @@
   &__item {
     display: flex;
     flex-direction: column;
-    flex-basis: 15rem;
-    max-height: 25rem;
-    min-width: 15rem;
-    height: 23rem;
   }
 }
