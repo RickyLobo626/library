@@ -1,16 +1,16 @@
 import { createBookEl } from "./createElements.js";
 
-export const createBook = function (data, bookId) {
+export const Book = function (bookId, data) {
+  const { el, readEl, switchInputEl, deleteBtnEl } = createBookEl(data);
   const id = bookId;
   const title = data.title;
   const author = data.author;
   const pages = data.pages;
   let read = data.read;
 
-  const { el, readEl, switchInputEl, deleteBtnEl } = createBookEl(data);
-
-  const toggleRead = function () {
+  const toggleRead = function (e) {
     read = !read;
+
     readEl.textContent = read ? "Read" : "Not read yet";
   };
 
@@ -20,12 +20,12 @@ export const createBook = function (data, bookId) {
     return `${title} by ${author}, ${pages}, ${readStr}.`;
   };
 
+  switchInputEl.addEventListener("click", toggleRead);
+
   return {
     id,
     el,
-    switchInputEl,
     deleteBtnEl,
-    toggleRead,
     getInfo,
   };
 };

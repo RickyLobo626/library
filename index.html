@@ -12,8 +12,10 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
     <script type="module" src="./scripts/createElements.js"></script>
-    <script type="module" src="./scripts/createBook.js"></script>
+    <script type="module" src="./scripts/Library.js"></script>
+    <script type="module" src="./scripts/Book.js"></script>
     <script type="module" src="./scripts/main.js" defer></script>
   </head>
   <body>
@@ -24,32 +26,32 @@
       </button>
     </header>
     <main class="main">
-      <ul id="BookList" class="grid"></ul>
+      <ul id="library" class="grid"></ul>
 
       <button
         class="main__add icon-btn icon-btn--elevated color-blue"
-        data-click="open-modal-add"
+        data-click="open-book-form"
       >
         &plus;
       </button>
 
       <!-- START -->
       <div
-        id="ModalAddBookOverlay"
-        data-click="close-modal-add"
+        id="form-modal-overlay"
+        data-click="close-book-form"
         class="modal-overlay hidden"
       >
-        <div class="modal add-book" id="ModalAddBook">
-          <header class="add-book__header">
-            <p class="add-book__title">Add a book</p>
+        <div class="modal form-modal" id="form-modal">
+          <header class="form-modal__header">
+            <p class="form-modal__title">Add a book</p>
             <button
               class="modal__close icon-btn icon-btn--small"
-              data-click="close-modal-add"
+              data-click="close-book-form"
             >
               &times;
             </button>
           </header>
-          <form id="FormAddBook" class="add-book__form" action="#" novalidate>
+          <form id="book-form" class="form-modal__form" action="#" novalidate>
             <fieldset>
               <legend>Which book would you like to add?</legend>
               <div class="form-control">
@@ -107,10 +109,10 @@
               </div>
             </fieldset>
           </form>
-          <div class="add-book__actions">
+          <div class="form-modal__actions">
             <button
               type="submit"
-              form="FormAddBook"
+              form="book-form"
               class="text-btn bg-blue color-white"
             >
               Add

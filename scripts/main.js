@@ -1,16 +1,15 @@
-import { createBook } from "./createBook.js";
+import { Library } from "./Library.js";
 
 ("use strict");
 
-const bookListEl = document.getElementById("BookList");
-const modalAddBookEl = document.getElementById("ModalAddBook");
-const modalAddBookOverlayEl = document.getElementById("ModalAddBookOverlay");
-const formAddBookEl = document.getElementById("FormAddBook");
-const inputsAddBookEls = document.querySelectorAll("[data-book-inputs]");
-const btnsEls = document.querySelectorAll("[data-click]");
-// const main = document.querySelector(".main")
+const libraryEl = document.getElementById("library");
+const formModalEl = document.getElementById("form-modal");
+const formModalOverlayEl = document.getElementById("form-modal-overlay");
+const formEl = document.getElementById("book-form");
+const formInputEls = document.querySelectorAll("[data-book-inputs]");
+const btnEls = document.querySelectorAll("[data-click]");
 
-let library = [];
+const library = Library(libraryEl);
 
 const resetInputs = function (inputs) {
   inputs.forEach((input) => {
@@ -39,60 +38,36 @@ const validateForm = function (inputs) {
 const getFormObj = function (form) {
   const formData = new FormData(form);
   const obj = Object.fromEntries(formData);
-  obj.read = !!obj.read;
 
   return obj;
-};
-
-const addBookToLibrary = function (formObj) {
-  const id = library.length + 1;
-  const book = createBook(formObj, id);
-
-  library.push(book);
-
-  bookListEl.appendChild(book.el);
-
-  // Action Events
-  book.switchInputEl.addEventListener("click", (e) => {
-    book.toggleRead();
-  });
-
-  book.deleteBtnEl.addEventListener("click", (e) => {
-    const bookIndex = library.findIndex((item) => {
-      return item.id == id;
-    });
-
-    library.splice(bookIndex, 1); // Remove from array
-    book.el.remove(); // Remove from dom
-  });
 };
 
 const onSubmit = function (e) {
   e.preventDefault();
 
-  const formIsValid = validateForm(inputsAddBookEls);
+  const formIsValid = validateForm(formInputEls);
 
   if (!formIsValid) return;
 
-  const formObj = getFormObj(formAddBookEl);
+  const formObj = getFormObj(formEl);
 
-  addBookToLibrary(formObj);
+  library.addBook(formObj);
 
-  closeModalAddBook();
+  closeFormModal();
 
-  resetInputs(inputsAddBookEls);
+  resetInputs(formInputEls);
 };
 
-const openModalAddBook = function () {
-  modalAddBookOverlayEl.classList.remove("hidden");
+const openFormModal = function () {
+  formModalOverlayEl.classList.remove("hidden");
 
   setTimeout(() => {
-    modalAddBookEl.classList.add("modal--open");
+    formModalEl.classList.add("modal--open");
   }, 50);
 
-  formAddBookEl.addEventListener("submit", onSubmit);
+  formEl.addEventListener("submit", onSubmit);
 
-  inputsAddBookEls.forEach((input) => {
+  formInputEls.forEach((input) => {
     if (input.classList.contains("field")) {
       input.addEventListener("keyup", (e) => {
         input.classList.remove("field--invalid");
@@ -101,29 +76,29 @@ const openModalAddBook = function () {
   });
 };
 
-const closeModalAddBook = function () {
+const closeFormModal = function () {
   setTimeout(() => {
-    modalAddBookEl.classList.remove("modal--open");
+    formModalEl.classList.remove("modal--open");
   }, 50);
 
-  modalAddBookOverlayEl.classList.add("hidden");
+  formModalOverlayEl.classList.add("hidden");
 
-  resetInputs(inputsAddBookEls);
+  resetInputs(formInputEls);
 };
 
-btnsEls.forEach((btn) => {
+btnEls.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     switch (btn.dataset.click) {
-      case "open-modal-add":
-        openModalAddBook();
+      case "open-book-form":
+        openFormModal();
         break;
-      case "close-modal-add":
-        closeModalAddBook();
+      case "close-book-form":
+        closeFormModal();
         break;
     }
   });
 });
 
-modalAddBookEl.addEventListener("click", (e) => {
+formModalEl.addEventListener("click", (e) => {
   e.stopPropagation();
 });
