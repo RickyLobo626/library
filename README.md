@@ -2,12 +2,12 @@
 
 The Odin Project - Library
 
-In this project I learned how to create Factory functions!
+In this project I use the Module Pattern and Factory functions!
 
 Skills used for this project:
 
-- HTML<br>
+- Vanilla JavaScript(incl. Module Pattern and Factory functions)<br>
 - CSS/SCSS (Incl. Flexbox, position and transitions)<br>
-- Vanilla JavaScript <br>
+- HTML<br>
 
 <a href="https://rickylobo626.github.io/library">Live Preview</a>
