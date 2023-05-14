@@ -1,3 +1,4 @@
+import { fakeStorage } from "./fakeStorage.js";
 import { library } from "./library.js";
 
 ("use strict");
@@ -87,7 +88,7 @@ const formModal = (function () {
     if (!formIsValid) return;
 
     const formObj = _getFormObj(_formEl);
-
+    console.log(formObj);
     library.addBook(formObj);
 
     close();
@@ -123,4 +124,8 @@ btnEls.forEach((btn) => {
         break;
     }
   });
+});
+
+fakeStorage.forEach((book) => {
+  library.addBook(book);
 });

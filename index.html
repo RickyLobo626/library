@@ -15,6 +15,7 @@
 
     <script type="module" src="./scripts/createElements.js"></script>
     <script type="module" src="./scripts/createBook.js"></script>
+    <script type="module" src="./scripts/fakeStorage.js"></script>
     <script type="module" src="./scripts/library.js"></script>
     <script type="module" src="./scripts/main.js" defer></script>
   </head>
@@ -35,7 +36,6 @@
         &plus;
       </button>
 
-      <!-- START -->
       <div
         id="form-modal-overlay"
         data-click="close-book-form"
@@ -114,18 +114,6 @@
               class="text-btn bg-blue color-white"
             >
               Add
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- END -->
-
-      <div class="modal-overlay hidden" id="modal-overlay">
-        <div class="modal" id="modal">
-          <div class="modal__content">
-            <p class="modal__text" id="modal-text">you won!</p>
-            <button class="modal__restart btn" id="restart-btn">
-              play again
             </button>
           </div>
         </div>
