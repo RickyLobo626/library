@@ -19,7 +19,7 @@ const createBodyEls = function (data) {
   const titleEl = createEl("p", "book__title", data.title);
   const authorEl = createEl("p", "book__author", data.author);
   const bottomEl = createEl("div", "book__bottom");
-  const pagesEl = createEl("p", "book__pages", data.pages);
+  const pagesEl = createEl("p", "book__pages", `${data.pages} pages`);
   const readEl = createEl(
     "p",
     "book__read",

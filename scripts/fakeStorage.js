@@ -4,7 +4,7 @@ export const fakeStorage = [
     id: 2,
     title: "Harry Potter and the Goblet of Fire",
     author: "JK Rowling",
-    pages: "752 pages",
+    pages: "752",
   },
   {
     id: 3,
