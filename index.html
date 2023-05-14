@@ -51,7 +51,13 @@
               &times;
             </button>
           </header>
-          <form id="book-form" class="form-modal__form" action="#" novalidate>
+          <form
+            id="book-form"
+            name="book-form"
+            class="form-modal__form"
+            action="#"
+            novalidate
+          >
             <fieldset>
               <legend>Which book would you like to add?</legend>
               <div class="form-control">
@@ -63,10 +69,9 @@
                   class="field"
                   maxlength="45"
                   placeholder="The Hobbit"
-                  data-book-inputs="title"
                   required
                 />
-                <p class="error-message">This field is required</p>
+                <p class="error-message"></p>
               </div>
               <div class="form-control">
                 <label for="author">Author</label>
@@ -77,10 +82,9 @@
                   class="field"
                   maxlength="40"
                   placeholder="J. R. R. Tolkien"
-                  data-book-inputs="author"
                   required
                 />
-                <p class="error-message">This field is required</p>
+                <p class="error-message"></p>
               </div>
               <div class="form-control">
                 <label for="pages">Number of pages</label>
@@ -90,20 +94,14 @@
                   type="number"
                   class="field"
                   placeholder="310"
-                  max="99999"
-                  data-book-inputs="pages"
+                  value="0"
                   required
                 />
-                <p class="error-message">This field is required</p>
+                <p class="error-message"></p>
               </div>
               <div class="form-control">
                 <label for="read">
-                  <input
-                    type="checkbox"
-                    id="read"
-                    name="read"
-                    data-book-inputs="read"
-                  />
+                  <input type="checkbox" id="read" name="read" />
                   <span>I've read this book</span>
                 </label>
               </div>

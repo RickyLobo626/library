@@ -8,15 +8,9 @@ const formModal = (function () {
   const el = document.getElementById("form-modal");
   const _overlayEl = document.getElementById("form-modal-overlay");
   const _formEl = document.getElementById("book-form");
-  const _inputEls = document.querySelectorAll("[data-book-inputs]");
-
-  _inputEls.forEach((input) => {
-    if (input.classList.contains("field")) {
-      input.addEventListener("keyup", (e) => {
-        input.classList.remove("field--invalid");
-      });
-    }
-  });
+  const _inputEls = [
+    ...document.forms["book-form"].getElementsByTagName("input"),
+  ];
 
   const open = function () {
     _overlayEl.classList.remove("hidden");
@@ -51,8 +45,26 @@ const formModal = (function () {
     let isValid = true;
 
     _inputEls.forEach((input) => {
-      if (input.value == "" && input.hasAttribute("required")) {
+      let errorMsg = "";
+      const minPages = 1;
+      const maxPages = 99999;
+
+      if (input.type == "number") console.log(input.value);
+
+      if (input.value === "" && input.hasAttribute("required")) {
+        errorMsg = "This field is required";
+      }
+
+      if (
+        input.type == "number" &&
+        (input.value < minPages || input.value > maxPages)
+      ) {
+        errorMsg = `Value must be a number between ${minPages} and ${maxPages}`;
+      }
+
+      if (errorMsg) {
         input.classList.add("field--invalid");
+        input.nextElementSibling.textContent = errorMsg;
         isValid = false;
       }
     });
@@ -60,8 +72,8 @@ const formModal = (function () {
     return isValid;
   };
 
-  const _getFormObj = function (form) {
-    const formData = new FormData(form);
+  const _getFormObj = function () {
+    const formData = new FormData(_formEl);
     const obj = Object.fromEntries(formData);
 
     return obj;
@@ -82,6 +94,14 @@ const formModal = (function () {
 
     _resetInputs();
   };
+
+  _inputEls.forEach((input) => {
+    if (input.classList.contains("field")) {
+      input.addEventListener("input", (e) => {
+        input.classList.remove("field--invalid");
+      });
+    }
+  });
 
   _formEl.addEventListener("submit", submitForm);
 
