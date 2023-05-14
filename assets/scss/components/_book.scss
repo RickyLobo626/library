@@ -23,23 +23,44 @@
     padding: 1.2rem 1.6rem;
     display: flex;
     flex-direction: column;
+
+    .book__top {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .book__bottom {
+      font-weight: 500;
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
   }
 
   &__title {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.4;
     font-weight: 500;
     text-align: center;
     word-wrap: break-word;
 
-    margin-bottom: 1.6rem;
+    text-shadow: 0 0 30px white;
   }
 
   &__author {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
     text-align: center;
+
+    min-height: 3rem;
+    margin-top: auto;
+    margin-bottom: 2.8rem;
     word-wrap: break-word;
   }
 
