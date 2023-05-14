@@ -59,6 +59,8 @@ export const createBookEl = function (data) {
   const { bookEl, readEl } = createBodyEls(data);
   const { actionsEl, switchInputEl, deleteBtnEl } = createActionEls(data);
 
+  if (data.read) switchInputEl.setAttribute("checked", true);
+
   el.append(bookEl, actionsEl);
 
   return { el, readEl, switchInputEl, deleteBtnEl };

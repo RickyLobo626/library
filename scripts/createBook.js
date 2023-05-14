@@ -15,12 +15,10 @@ export const createBook = function (bookId, data) {
   const _pages = data.pages;
   let _read = data.read;
 
-  _switchInputEl.checked = data.read;
+  const _toggleRead = function () {
+    _read = _switchInputEl.checked;
 
-  const _toggleRead = function (e) {
-    _read = !_read;
-
-    _readEl.textContent = read ? "Read" : "Not read yet";
+    _readEl.textContent = _read ? "Read" : "Not read yet";
   };
 
   const _remove = function () {
