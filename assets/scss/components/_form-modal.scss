@@ -1,4 +1,10 @@
 .form-modal {
+  width: 100%;
+  max-width: 30rem;
+
+  display: flex;
+  flex-direction: column;
+
   &__header {
     display: flex;
     align-items: center;
