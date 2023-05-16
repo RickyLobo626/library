@@ -1,5 +1,6 @@
 .form-modal {
   width: 100%;
+
   max-width: 30rem;
 
   display: flex;
@@ -21,6 +22,8 @@
 
   &__form {
     fieldset {
+      height: 100%;
+
       padding: 1.6rem 1.8rem;
 
       legend {
@@ -34,7 +37,7 @@
       }
 
       .form-control {
-        margin-bottom: 2.2rem;
+        margin-bottom: 1.8rem;
 
         &:last-child {
           margin: 0;
@@ -62,10 +65,9 @@
   &__actions {
     display: flex;
     margin-top: auto;
-    padding: 1.2rem 1.8rem;
+    padding: 1rem 1.8rem;
 
     .text-btn {
-      font-size: 1.2rem;
       width: 100%;
       padding: 1rem;
     }

@@ -51,62 +51,64 @@
               &times;
             </button>
           </header>
-          <form
-            id="book-form"
-            name="book-form"
-            class="form-modal__form"
-            action="#"
-            novalidate
-          >
-            <fieldset>
-              <legend>Which book would you like to add?</legend>
-              <div class="form-control">
-                <label for="title">Title</label>
-                <input
-                  id="title"
-                  name="title"
-                  type="text"
-                  class="field"
-                  maxlength="45"
-                  placeholder="The Hobbit"
-                  required
-                />
-                <p class="error-message"></p>
-              </div>
-              <div class="form-control">
-                <label for="author">Author</label>
-                <input
-                  id="author"
-                  name="author"
-                  type="text"
-                  class="field"
-                  maxlength="40"
-                  placeholder="J. R. R. Tolkien"
-                  required
-                />
-                <p class="error-message"></p>
-              </div>
-              <div class="form-control">
-                <label for="pages">Number of pages</label>
-                <input
-                  id="pages"
-                  name="pages"
-                  type="number"
-                  class="field"
-                  placeholder="310"
-                  value="0"
-                  required
-                />
-                <p class="error-message"></p>
-              </div>
-              <div class="form-control">
-                <label for="read">
-                  <input type="checkbox" id="read" name="read" />
-                  <span>I've read this book</span>
-                </label>
-              </div>
-            </fieldset>
-          </form>
+          <div class="modal__content">
+            <form
+              id="book-form"
+              name="book-form"
+              class="form-modal__form"
+              action="#"
+              novalidate
+            >
+              <fieldset>
+                <legend>Which book would you like to add?</legend>
+                <div class="form-control">
+                  <label for="title">Title</label>
+                  <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    class="form-control__field"
+                    maxlength="45"
+                    placeholder="The Hobbit"
+                    required
+                  />
+                  <p class="error-message"></p>
+                </div>
+                <div class="form-control">
+                  <label for="author">Author</label>
+                  <input
+                    id="author"
+                    name="author"
+                    type="text"
+                    class="form-control__field"
+                    maxlength="40"
+                    placeholder="J. R. R. Tolkien"
+                    required
+                  />
+                  <p class="error-message"></p>
+                </div>
+                <div class="form-control">
+                  <label for="pages">Number of pages</label>
+                  <input
+                    id="pages"
+                    name="pages"
+                    type="number"
+                    class="form-control__field"
+                    placeholder="310"
+                    value="0"
+                    required
+                  />
+                  <p class="error-message"></p>
+                </div>
+                <div class="form-control">
+                  <label for="read">
+                    <input type="checkbox" id="read" name="read" />
+                    <span>I've read this book</span>
+                  </label>
+                </div>
+              </fieldset>
+            </form>
+          </div>
           <div class="form-modal__actions">
             <button
               type="submit"

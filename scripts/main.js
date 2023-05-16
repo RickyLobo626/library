@@ -36,7 +36,7 @@ const formModal = (function () {
       if (input.getAttribute("type") == "checkbox") {
         input.checked = false;
       } else {
-        input.classList.remove("field--invalid");
+        input.classList.remove("form-control__field--invalid");
         input.value = "";
       }
     });
@@ -64,7 +64,7 @@ const formModal = (function () {
       }
 
       if (errorMsg) {
-        input.classList.add("field--invalid");
+        input.classList.add("form-control__field--invalid");
         input.nextElementSibling.textContent = errorMsg;
         isValid = false;
       }
@@ -99,7 +99,7 @@ const formModal = (function () {
   _inputEls.forEach((input) => {
     if (input.classList.contains("field")) {
       input.addEventListener("input", (e) => {
-        input.classList.remove("field--invalid");
+        input.classList.remove("form-control__field--invalid");
       });
     }
   });
