@@ -2,7 +2,7 @@
 
 The Odin Project - Library
 
-In this project I use the Module Pattern and Factory functions!
+In this project I use the Module and Factory Patterns!
 
 Skills used for this project:
 
