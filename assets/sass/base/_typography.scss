@@ -1,0 +1,12 @@
+html {
+  font-size: 80%;
+
+  @media (min-width: 60em) {
+    font-size: 100%;
+  }
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+}
