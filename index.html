@@ -13,10 +13,17 @@
       rel="stylesheet"
     />
 
-    <script type="module" src="./scripts/createElements.js"></script>
-    <script type="module" src="./scripts/createBook.js"></script>
-    <script type="module" src="./scripts/fakeStorage.js"></script>
-    <script type="module" src="./scripts/library.js"></script>
+    <script
+      type="module"
+      src="./scripts/factories/CreateBookElement.js"
+    ></script>
+    <script type="module" src="./scripts/factories/CreateBook.js"></script>
+    <script type="module" src="./scripts/helpers/elementHelpers.js"></script>
+    <script type="module" src="./scripts/modules/Library.js"></script>
+    <script type="module" src="./scripts/modules/LibraryElement.js"></script>
+    <script type="module" src="./scripts/modules/BookForm.js"></script>
+    <script type="module" src="./scripts/modules/BookFormModal.js"></script>
+    <script type="module" src="./scripts/storage/fakeStorage.js"></script>
     <script type="module" src="./scripts/main.js" defer></script>
   </head>
   <body>
