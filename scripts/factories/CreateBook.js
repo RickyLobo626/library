@@ -18,7 +18,7 @@ const CreateBook = function (bookId, data) {
     return `${_bookObj.title} by ${_bookObj.author}, ${_bookObj.pages}, ${readStr}.`;
   };
 
-  const getters = {
+  return {
     get id() {
       return _id;
     },
@@ -42,10 +42,6 @@ const CreateBook = function (bookId, data) {
     get author() {
       return _author;
     },
-  };
-
-  return {
-    ...getters,
     toggleRead,
     getInfo,
   };
